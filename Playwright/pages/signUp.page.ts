@@ -25,6 +25,9 @@ export class SignUpPage {
     name: 'Create Account',
   });
   continue = this.page.getByRole('link', { name: 'Continue' });
+  textAccountCreated = this.page.getByText('Account Created!');
+  textCongratulation = this.page.getByText('Congratulations! Your new');
+  textYouCanNow = this.page.getByText('You can now take advantage of');
   
   async singUpSuccefull(
     password: string,
@@ -56,7 +59,6 @@ export class SignUpPage {
     await this.zipcode.fill(zipCode);
     await this.mobileNumer.fill(phone);
     await this.buttonCreateAccount.click();
-    await this.continue.click();
   }
 
 }
