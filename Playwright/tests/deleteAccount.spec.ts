@@ -1,21 +1,24 @@
 import { test, expect } from '@playwright/test';
 import { loginData } from '../test-data/login.data';
 import { SignUpPage } from '../pages/signUp.page';
-import { LoginSignUpPage } from '../pages/LoginSignUp.pages';
+import { LoginSignUpPage } from '../pages/loginSignUp.page';
+import { EmailGenerator } from '../components/emailGenerator';
 
 test.describe('User sign up page', () => {
   let loginSignUpPage;
   let signUpPage;
+  let email;
   const userId = loginData.userId;
 
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
+    const emailGenerator = new EmailGenerator();
+    email = emailGenerator.generateEmail();
     loginSignUpPage = new LoginSignUpPage(page);
     signUpPage = new SignUpPage(page);
   });
 
   test('successful sign up', async () => {
-
     // Arrange
     const suffix = new Date().getTime();
     const email = `userExamples123+${suffix}@gmail.com`;
@@ -57,7 +60,7 @@ test.describe('User sign up page', () => {
     await signUpPage.topNavigationBar.buttonSignupLogin.click();
     await loginSignUpPage.login(email, password);
 
-// Assert
+    // Assert
     await expect(loginSignUpPage.errorMessage).toHaveText(
       loginSignUpPage.message,
     );

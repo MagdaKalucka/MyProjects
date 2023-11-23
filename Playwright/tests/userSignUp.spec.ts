@@ -1,15 +1,19 @@
 import { test, expect } from '@playwright/test';
 import { loginData } from '../test-data/login.data';
 import { SignUpPage } from '../pages/signUp.page';
-import { LoginSignUpPage } from '../pages/LoginSignUp.pages';
+import { LoginSignUpPage } from '../pages/loginSignUp.page';
+import { EmailGenerator } from '../components/emailGenerator';
 
 test.describe('User sign up page', () => {
   let loginSignUpPage;
   let signUpPage;
+  let email;
   const userId = loginData.userId;
 
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
+    const emailGenerator = new EmailGenerator();
+    email = emailGenerator.generateEmail();
     loginSignUpPage = new LoginSignUpPage(page);
     signUpPage = new SignUpPage(page);
   });
@@ -17,8 +21,8 @@ test.describe('User sign up page', () => {
   test('successful sign up', async () => {
 
     // Arrange
-    const suffix = new Date().getTime();
-    const email = `userExamples123+${suffix}@gmail.com`;
+    // const suffix = new Date().getTime();
+    // const email = `userExamples123+${suffix}@gmail.com`;
     const password = loginData.userPassword;
     const day = '3';
     const month = 'April';
@@ -79,8 +83,6 @@ test.describe('User sign up page', () => {
 
   test('empty user - unsuccessful sign up', async () => {
     // Arrange
-    const suffix = new Date().getTime();
-    const email = `userExamples123+${suffix}@gmail.com`;
     const emptyUserId = '';
 
     //Act
@@ -90,9 +92,8 @@ await loginSignUpPage.singUp(emptyUserId, email);
   });
 
   test('user exists - unsuccessful sign up', async () => {
+
     //Arrange
-    const suffix = new Date().getTime();
-    const email = `userExamples123+${suffix}@gmail.com`;
     const password = loginData.userPassword;
     const day = '3';
     const month = 'April';
@@ -107,8 +108,6 @@ await loginSignUpPage.singUp(emptyUserId, email);
     const zipCode = '4444';
     const phone = '123456789';
     const messageUserExist = 'Email Address already exist!';
-    //const message = 'Your email or password is incorrect!';
-    //const messageAccountCreated = 'Account Created!';
 
     // Act
     await loginSignUpPage.singUp(userId, email);

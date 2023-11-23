@@ -1,19 +1,21 @@
 import { test, expect } from '@playwright/test';
 import { loginData } from '../../test-data/login.data';
 import { SignUpPage } from '../../pages/signUp.page';
-import { LoginSignUpPage } from '../../pages/LoginSignUp.pages';
+import { LoginSignUpPage } from '../../pages/loginSignUp.page';
+import { EmailGenerator } from '../../components/emailGenerator';
 
 test.describe('User Login page', () => {
   let loginSignUpPage;
-  const suffix = new Date().getTime();
-  const email = `userExamples123+${suffix}@gmail.com`;
+  let email;
+  const userId = loginData.userId;
   const password = loginData.userPassword;
 
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
+    const emailGenerator = new EmailGenerator();
+    email = emailGenerator.generateEmail();
     loginSignUpPage = new LoginSignUpPage(page);
     const signUpPage = new SignUpPage(page);
-    const userId = loginData.userId;
 
     const day = '3';
     const month = 'April';
@@ -49,28 +51,47 @@ test.describe('User Login page', () => {
   });
 
   test('successful sign in', async () => {
-    
+    //Arrange
+    const messageLoggedInUs = `Logged in as ${userId} `;
+
+    //Act
     await loginSignUpPage.login(email, password);
-    
+
+    //Assert
   });
   test('uncorrect email - unsuccessful sign in', async () => {
+    //Arrange
     const uncorrectEmail = 'user@gmail.com';
-    
+
+    //Act
     await loginSignUpPage.login(uncorrectEmail, password);
-    await expect(loginSignUpPage.errorMessage).toHaveText(loginSignUpPage.message);
+
+    //Assert
+    await expect(loginSignUpPage.errorMessage).toHaveText(
+      loginSignUpPage.message,
+    );
   });
 
   test('empty password - successful sign in', async () => {
+    //Arrange
     const emptypassword = '';
 
+    //Act
     await loginSignUpPage.login(email, emptypassword);
-     //it should been here assert but I don`t know how I can find selector and text to tooltip. :) 
+
+    //There should be Assert here, but I don`t know how I can find selector and text to tooltip. :)
   });
 
   test('uncorrect password - successful sign in', async () => {
+    //Arrange
     const uncorrectpassword = 'user';
 
+    //Act
     await loginSignUpPage.login(email, uncorrectpassword);
-    await expect(loginSignUpPage.errorMessage).toHaveText(loginSignUpPage.message);
-});
+
+    //Assert
+    await expect(loginSignUpPage.errorMessage).toHaveText(
+      loginSignUpPage.message,
+    );
+  });
 });
