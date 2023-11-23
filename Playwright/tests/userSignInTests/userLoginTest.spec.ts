@@ -2,7 +2,8 @@ import { test, expect } from '@playwright/test';
 import { loginData } from '../../test-data/login.data';
 import { SignUpPage } from '../../pages/signUp.page';
 import { LoginSignUpPage } from '../../pages/loginSignUp.page';
-import { EmailGenerator } from '../../components/emailGenerator';
+import { EmailGenerator } from '../../test-data/emailGenerator';
+
 
 test.describe('User Login page', () => {
   let loginSignUpPage;
