@@ -3,7 +3,7 @@ import { TopNavigationBar } from '../components/topNavigationBar.components';
 
 export class LoginSignUpPage {
   constructor(private page: Page) {}
-  topNavigationBar = new TopNavigationBar(this.page);
+ topNavigationBar = new TopNavigationBar(this.page);
 
   inputName = this.page.getByPlaceholder('Name');
   inputEmail = this.page.locator(".signup-form input[name='email']");
@@ -16,6 +16,8 @@ export class LoginSignUpPage {
   inputPassword = this.page.getByPlaceholder('Password');
   buttonLogin = this.page.getByRole('button', { name: 'Login' });
   errorMessage = this.page.getByText('Your email or password is');
+  message: string = 'Your email or password is incorrect!';
+  errorMessageExist = this.page.getByText('Email Address already exist!');
 
   async singUp(userId: string, email: string): Promise<void> {
     await this.topNavigationBar.buttonSignupLogin.click();

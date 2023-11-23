@@ -48,9 +48,29 @@ test.describe('User Login page', () => {
     await loginSignUpPage.topNavigationBar.logout.click();
   });
 
-  test('successful sign in', async ({ page }) => {
+  test('successful sign in', async () => {
     
     await loginSignUpPage.login(email, password);
     
   });
+  test('uncorrect email - unsuccessful sign in', async () => {
+    const uncorrectEmail = 'user@gmail.com';
+    
+    await loginSignUpPage.login(uncorrectEmail, password);
+    await expect(loginSignUpPage.errorMessage).toHaveText(loginSignUpPage.message);
+  });
+
+  test('empty password - successful sign in', async () => {
+    const emptypassword = '';
+
+    await loginSignUpPage.login(email, emptypassword);
+     //it should been here assert but I don`t know how I can find selector and text to tooltip. :) 
+  });
+
+  test('uncorrect password - successful sign in', async () => {
+    const uncorrectpassword = 'user';
+
+    await loginSignUpPage.login(email, uncorrectpassword);
+    await expect(loginSignUpPage.errorMessage).toHaveText(loginSignUpPage.message);
+});
 });
