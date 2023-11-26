@@ -10,10 +10,11 @@ export class ContactUs {
   contactSubject = this.page.getByPlaceholder('Subject');
   contactMessage = this.page.getByPlaceholder('Your Message Here');
   buttonSubmit = this.page.getByRole('button', { name: 'Submit' });
-  alertButton = this.page.once('dialog', dialog => {
-    console.log(`Dialog message: ${dialog.message()}`);
-    dialog.dismiss().catch(() => {});
+  alertButton = this.page.on('dialog', async dialog => {
+    await dialog.accept();
+    //.dismiss
   });
   message =  this.page.locator('#contact-page').getByText('Success! Your details have');
   home = this.page.getByRole('link', { name: ' Home' });
 };
+

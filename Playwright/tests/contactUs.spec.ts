@@ -26,7 +26,7 @@ test.describe('Contact us page', () => {
     await contactUs.contactSubject.fill('test');
     await contactUs.contactMessage.fill('this is test message');
     await contactUs.buttonSubmit.click();
-    await contactUs.alertButton.click();
+    await contactUs.alertButton;
 
     //Asert
     await expect(contactUs.message).toHaveText(message);
@@ -63,7 +63,7 @@ test.describe('Contact us page', () => {
     await contactUs.topNavigationBar.buttonContactUs.click();
     await contactUs.contactEmail.fill(email);
     await contactUs.buttonSubmit.click();
-    await contactUs.alertButton.click();
+    await contactUs.alertButton;
 
     //Asert
     await expect(contactUs.message).toHaveText(message);
