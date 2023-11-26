@@ -6,5 +6,6 @@ export class TopNavigationBar {
   deleteAccount = this.page.getByRole('link', { name: 'Delete Account' });
   logout = this.page.getByRole('link', { name: ' Logout'});
   loggedInUs = this.page.locator('.fa fa-user');
+  buttonContactUs = this.page.getByRole('link', { name: ' Contact us' });
 
 }

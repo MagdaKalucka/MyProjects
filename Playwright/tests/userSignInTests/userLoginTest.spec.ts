@@ -51,7 +51,7 @@ test.describe('User Login page', () => {
     await loginSignUpPage.topNavigationBar.logout.click();
   });
 
-  test('successful sign in', async () => {
+  test('Successful sign in', async () => {
     //Arrange
     const messageLoggedInUs = `Logged in as ${userId} `;
 
@@ -60,7 +60,7 @@ test.describe('User Login page', () => {
 
     //Assert
   });
-  test('uncorrect email - unsuccessful sign in', async () => {
+  test('Uncorrect email - unsuccessful sign in', async () => {
     //Arrange
     const uncorrectEmail = 'user@gmail.com';
 
@@ -73,7 +73,7 @@ test.describe('User Login page', () => {
     );
   });
 
-  test('empty password - successful sign in', async () => {
+  test('Empty password - successful sign in', async () => {
     //Arrange
     const emptypassword = '';
 
@@ -83,7 +83,7 @@ test.describe('User Login page', () => {
     //There should be Assert here, but I don`t know how I can find selector and text to tooltip. :)
   });
 
-  test('uncorrect password - successful sign in', async () => {
+  test('Uncorrect password - successful sign in', async () => {
     //Arrange
     const uncorrectpassword = 'user';
 

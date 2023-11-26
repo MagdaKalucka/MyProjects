@@ -18,7 +18,7 @@ test.describe('User sign up page', () => {
     signUpPage = new SignUpPage(page);
   });
 
-  test('successful sign up', async () => {
+  test('Successful sign up', async () => {
 
     // Arrange
     // const suffix = new Date().getTime();
@@ -71,7 +71,7 @@ test.describe('User sign up page', () => {
     await loginSignUpPage.login(email, password);
   });
 
-  test('uncorrect email - unsuccessful sign up', async () => {
+  test('Uncorrect email - unsuccessful sign up', async () => {
     // Arrange
     const uncorrectEmail = 'userexample';
 
@@ -81,7 +81,7 @@ test.describe('User sign up page', () => {
     //there should be assert here, but I don`t know how I can find selector and text to tooltip. :)
   });
 
-  test('empty user - unsuccessful sign up', async () => {
+  test('Empty user - unsuccessful sign up', async () => {
     // Arrange
     const emptyUserId = '';
 
@@ -91,7 +91,7 @@ await loginSignUpPage.singUp(emptyUserId, email);
     //there should be assert here, but I don`t know how I can find selector and text to tooltip. :)
   });
 
-  test('user exists - unsuccessful sign up', async () => {
+  test('User exists - unsuccessful sign up', async () => {
 
     //Arrange
     const password = loginData.userPassword;

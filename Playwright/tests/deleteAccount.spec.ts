@@ -4,7 +4,7 @@ import { SignUpPage } from '../pages/signUp.page';
 import { LoginSignUpPage } from '../pages/loginSignUp.page';
 import { EmailGenerator } from '../test-data/emailGenerator';
 
-test.describe('User sign up page', () => {
+test.describe('Delete account', () => {
   let loginSignUpPage;
   let signUpPage;
   let email;
@@ -18,7 +18,7 @@ test.describe('User sign up page', () => {
     signUpPage = new SignUpPage(page);
   });
 
-  test('successful sign up', async () => {
+  test('Delete account succesfull', async () => {
     // Arrange
     const suffix = new Date().getTime();
     const email = `userExamples123+${suffix}@gmail.com`;
