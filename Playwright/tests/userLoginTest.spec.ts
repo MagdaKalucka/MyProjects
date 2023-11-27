@@ -4,7 +4,6 @@ import { SignUpPage } from '../pages/signUp.page';
 import { LoginSignUpPage } from '../pages/loginSignUp.page';
 import { EmailGenerator } from '../test-data/emailGenerator';
 
-
 test.describe('User Login page', () => {
   let loginSignUpPage;
   let email;
@@ -53,12 +52,15 @@ test.describe('User Login page', () => {
 
   test('Successful sign in', async () => {
     //Arrange
-    const messageLoggedInUs = `Logged in as ${userId} `;
+    const messageLoggedInUs = `Logged in as ${userId}`;
 
     //Act
     await loginSignUpPage.login(email, password);
 
     //Assert
+    await expect(loginSignUpPage.topNavigationBar.loggedInUs).toContainText(
+      messageLoggedInUs,
+    );
   });
   test('Uncorrect email - unsuccessful sign in', async () => {
     //Arrange
@@ -75,15 +77,19 @@ test.describe('User Login page', () => {
 
   test('Empty password - successful sign in', async () => {
     //Arrange
-    const emptypassword = '';
+    const emptyPassword = '';
 
     //Act
-    await loginSignUpPage.login(email, emptypassword);
+    await loginSignUpPage.login(email, emptyPassword);
 
-    //There should be Assert here, but I don`t know how I can find selector and text to tooltip. :)
+    //Assert
+    await expect(loginSignUpPage.inputPassword).toHaveJSProperty(
+      'validationMessage',
+      loginSignUpPage.valueMissingMessage,
+    );
   });
 
-  test('Uncorrect password - successful sign in', async () => {
+  test('Uncorrect password - unsuccessful sign in', async () => {
     //Arrange
     const uncorrectpassword = 'user';
 

@@ -2,22 +2,25 @@ import { test, expect } from '@playwright/test';
 import { loginData } from '../test-data/login.data';
 import { ContactUs } from '../pages/contactUs.page';
 import { EmailGenerator } from '../test-data/emailGenerator';
+import { LoginSignUpPage } from '../pages/loginSignUp.page';
 
 test.describe('Contact us page', () => {
   let contactUs;
   let email;
+  let loginSignUp;
   const userId = loginData.userId;
+  const message = 'Success! Your details have been submitted successfully.';
 
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
     contactUs = new ContactUs(page);
+    loginSignUp = new LoginSignUpPage(page);
     const emailGenerator = new EmailGenerator();
     email = emailGenerator.generateEmail();
   });
 
   test('Successful sent the message- full form', async () => {
     //Arrange
-    const message = 'Success! Your details have been submitted successfully.';
 
     //Act
     await contactUs.topNavigationBar.buttonContactUs.click();
@@ -38,8 +41,10 @@ test.describe('Contact us page', () => {
     await contactUs.buttonSubmit.click();
 
     //Assert
-    //await expect().toHaveText('Proszę wypełnić to pole')
-    //there should be assert here, but I don`t know how I can find selector and text to tooltip. :)
+    await expect(contactUs.contactEmail).toHaveJSProperty(
+      'validationMessage',
+      loginSignUp.valueMissingMessage,
+    );
   });
 
   test('Form without email', async () => {
@@ -51,13 +56,14 @@ test.describe('Contact us page', () => {
     await contactUs.buttonSubmit.click();
 
     //Assert
-    //await expect().toHaveText('Proszę wypełnić to pole')
-    //there should be assert here, but I don`t know how I can find selector and text to tooltip. :)
+    await expect(contactUs.contactEmail).toHaveJSProperty(
+      'validationMessage',
+      loginSignUp.valueMissingMessage,
+    );
   });
 
   test('Form only with email', async () => {
     //Arrange
-    const message = 'Success! Your details have been submitted successfully.';
 
     //Act
     await contactUs.topNavigationBar.buttonContactUs.click();
@@ -68,5 +74,4 @@ test.describe('Contact us page', () => {
     //Asert
     await expect(contactUs.message).toHaveText(message);
   });
-
 });

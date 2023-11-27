@@ -19,7 +19,6 @@ test.describe('User sign up page', () => {
   });
 
   test('Successful sign up', async () => {
-
     // Arrange
     // const suffix = new Date().getTime();
     // const email = `userExamples123+${suffix}@gmail.com`;
@@ -58,7 +57,8 @@ test.describe('User sign up page', () => {
     // Assert
     await expect(signUpPage.textAccountCreated).toHaveText('Account Created!');
     await expect(signUpPage.textCongratulation).toHaveText(
-      'Congratulations! Your new account has been successfully created!');
+      'Congratulations! Your new account has been successfully created!',
+    );
     await expect(signUpPage.textYouCanNow).toHaveText(
       'You can now take advantage of member privileges to enhance your online shopping experience with us.',
     );
@@ -73,12 +73,23 @@ test.describe('User sign up page', () => {
 
   test('Uncorrect email - unsuccessful sign up', async () => {
     // Arrange
-    const uncorrectEmail = 'userexample';
 
     //Act
-    await loginSignUpPage.singUp(userId, uncorrectEmail);
+    await loginSignUpPage.singUp(userId, loginSignUpPage.uncorrectEmail);
 
-    //there should be assert here, but I don`t know how I can find selector and text to tooltip. :)
+    //Assert
+    await expect(loginSignUpPage.inputEmail).toHaveJSProperty('validationMessage', loginSignUpPage.typeMismatchMessage)
+  });
+
+  test('Empty email - unsuccessful sign up', async () => {
+    // Arrange
+    const emptyEmail = '';
+
+    //Act
+    await loginSignUpPage.singUp(userId, emptyEmail);
+
+    //Assert
+    await expect(loginSignUpPage.inputEmail).toHaveJSProperty('validationMessage', loginSignUpPage.valueMissingMessage);
   });
 
   test('Empty user - unsuccessful sign up', async () => {
@@ -86,13 +97,17 @@ test.describe('User sign up page', () => {
     const emptyUserId = '';
 
     //Act
-await loginSignUpPage.singUp(emptyUserId, email);
+    await loginSignUpPage.singUp(emptyUserId, email);
 
-    //there should be assert here, but I don`t know how I can find selector and text to tooltip. :)
+    //Assert
+    await expect(loginSignUpPage.inputName).toBeEmpty();
+    await expect(loginSignUpPage.buttonSignup).toContainText('Signup');
+    await expect(loginSignUpPage.buttonSignup).toBeEnabled();
+    await expect(loginSignUpPage.inputPassword).toHaveJSProperty('validationMessage', loginSignUpPage.valueMissingMessage);
+  
   });
 
   test('User exists - unsuccessful sign up', async () => {
-
     //Arrange
     const password = loginData.userPassword;
     const day = '3';
@@ -131,9 +146,7 @@ await loginSignUpPage.singUp(emptyUserId, email);
     await signUpPage.topNavigationBar.logout.click();
     await loginSignUpPage.singUp(userId, email);
 
-//Assert
-    await expect(loginSignUpPage.errorMessageExist).toHaveText(
-      messageUserExist,
-    );
+    //Assert
+    await expect(loginSignUpPage.errorMessageExist).toHaveText(messageUserExist);
   });
 });

@@ -3,7 +3,7 @@ import { TopNavigationBar } from '../components/topNavigationBar.components';
 
 export class LoginSignUpPage {
   constructor(private page: Page) {}
- topNavigationBar = new TopNavigationBar(this.page);
+  topNavigationBar = new TopNavigationBar(this.page);
 
   inputName = this.page.getByPlaceholder('Name');
   inputEmail = this.page.locator(".signup-form input[name='email']");
@@ -18,6 +18,9 @@ export class LoginSignUpPage {
   errorMessage = this.page.getByText('Your email or password is');
   message: string = 'Your email or password is incorrect!';
   errorMessageExist = this.page.getByText('Email Address already exist!');
+  valueMissingMessage: string = 'Wypełnij to pole.';
+  uncorrectEmail: string = 'userexample123';
+  typeMismatchMessage: string = `Uwzględnij znak „@” w adresie e-mail. W adresie „${this.uncorrectEmail}” brakuje znaku „@”.`;
 
   async singUp(userId: string, email: string): Promise<void> {
     await this.topNavigationBar.buttonSignupLogin.click();
