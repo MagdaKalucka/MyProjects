@@ -6,17 +6,25 @@ import { EmailGenerator } from '../test-data/emailGenerator';
 
 test.describe('User Login page', () => {
   let loginSignUpPage;
+  let signUpPage;
   let email;
   const userId = loginData.userId;
   const password = loginData.userPassword;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    
     const emailGenerator = new EmailGenerator();
     email = emailGenerator.generateEmail();
     loginSignUpPage = new LoginSignUpPage(page);
-    const signUpPage = new SignUpPage(page);
+    signUpPage = new SignUpPage(page);
+    await page.goto('/');
+    await loginSignUpPage.topNavigationBar.buttonSignupLogin.click();
 
+  });
+
+  test('Successful sign in', async () => {
+
+    //Arrange
     const day = '3';
     const month = 'April';
     const years = '1990';
@@ -48,10 +56,7 @@ test.describe('User Login page', () => {
     );
     await signUpPage.continue.click();
     await loginSignUpPage.topNavigationBar.logout.click();
-  });
 
-  test('Successful sign in', async () => {
-    //Arrange
     const messageLoggedInUs = `Logged in as ${userId}`;
 
     //Act
@@ -61,6 +66,10 @@ test.describe('User Login page', () => {
     await expect(loginSignUpPage.topNavigationBar.loggedInUs).toContainText(
       messageLoggedInUs,
     );
+
+    // clean up after test
+    await signUpPage.topNavigationBar.deleteAccount.click();
+    await signUpPage.continue.click();
   });
   test('Uncorrect email - unsuccessful sign in', async () => {
     //Arrange
@@ -75,7 +84,7 @@ test.describe('User Login page', () => {
     );
   });
 
-  test('Empty password - successful sign in', async () => {
+  test('Empty password - unsuccessful sign in', async () => {
     //Arrange
     const emptyPassword = '';
 

@@ -78,7 +78,10 @@ test.describe('User sign up page', () => {
     await loginSignUpPage.singUp(userId, loginSignUpPage.uncorrectEmail);
 
     //Assert
-    await expect(loginSignUpPage.inputEmail).toHaveJSProperty('validationMessage', loginSignUpPage.typeMismatchMessage)
+    await expect(loginSignUpPage.inputEmail).toHaveJSProperty(
+      'validationMessage',
+      loginSignUpPage.typeMismatchMessage,
+    );
   });
 
   test('Empty email - unsuccessful sign up', async () => {
@@ -89,7 +92,10 @@ test.describe('User sign up page', () => {
     await loginSignUpPage.singUp(userId, emptyEmail);
 
     //Assert
-    await expect(loginSignUpPage.inputEmail).toHaveJSProperty('validationMessage', loginSignUpPage.valueMissingMessage);
+    await expect(loginSignUpPage.inputEmail).toHaveJSProperty(
+      'validationMessage',
+      loginSignUpPage.valueMissingMessage,
+    );
   });
 
   test('Empty user - unsuccessful sign up', async () => {
@@ -103,8 +109,10 @@ test.describe('User sign up page', () => {
     await expect(loginSignUpPage.inputName).toBeEmpty();
     await expect(loginSignUpPage.buttonSignup).toContainText('Signup');
     await expect(loginSignUpPage.buttonSignup).toBeEnabled();
-    await expect(loginSignUpPage.inputPassword).toHaveJSProperty('validationMessage', loginSignUpPage.valueMissingMessage);
-  
+    await expect(loginSignUpPage.inputPassword).toHaveJSProperty(
+      'validationMessage',
+      loginSignUpPage.valueMissingMessage,
+    );
   });
 
   test('User exists - unsuccessful sign up', async () => {
@@ -147,6 +155,8 @@ test.describe('User sign up page', () => {
     await loginSignUpPage.singUp(userId, email);
 
     //Assert
-    await expect(loginSignUpPage.errorMessageExist).toHaveText(messageUserExist);
+    await expect(loginSignUpPage.errorMessageExist).toHaveText(
+      messageUserExist,
+    );
   });
 });

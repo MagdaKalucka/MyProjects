@@ -15,7 +15,6 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
-
   timeout: 60 * 1000,
   expect: {
     /**
@@ -38,9 +37,12 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://www.automationexercise.com',
 
+    /* create own attribute to selector */
+    //testIdAttribute: 'data-product-id',
+
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'retain-on-failure',
-    screenshot: 'only-on-failure',
+    screenshot: 'on',
     video: 'retain-on-failure'
   },
 
