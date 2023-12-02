@@ -13,13 +13,13 @@ export class SignUpPage {
   monthSelect = this.page.locator('#months');
   yearSelect = this.page.locator('#years');
   firstName = this.page.locator('#first_name');
-  lastName = this.page.locator('#last_name');
-  company = this.page.locator('#company');
+  lastNameL = this.page.locator('#last_name');
+  companyL = this.page.locator('#company');
   address1 = this.page.locator('#address1');
-  country = this.page.locator('#country');
-  state = this.page.locator('#state');
-  city = this.page.locator('#city');
-  zipcode = this.page.locator('#zipcode');
+  countryL = this.page.locator('#country');
+  stateL = this.page.locator('#state');
+  cityL = this.page.locator('#city');
+  zipCodeL = this.page.locator('#zipcode');
   mobileNumer = this.page.locator('#mobile_number');
   buttonCreateAccount = this.page.getByRole('button', {
     name: 'Create Account',
@@ -28,7 +28,19 @@ export class SignUpPage {
   textAccountCreated = this.page.getByText('Account Created!');
   textCongratulation = this.page.getByText('Congratulations! Your new');
   textYouCanNow = this.page.getByText('You can now take advantage of');
-  
+  day = '3';
+  month = 'April';
+  years = '1990';
+  name = 'Mark';
+  lastName = 'Jonnson';
+  company = 'Star';
+  adress = 'Morning 6';
+  country = 'Canada';
+  state = 'new';
+  city = 'York';
+  zipCode = '4444';
+  phone = '123456789';
+
   async singUpSuccefull(
     password: string,
     day: string,
@@ -50,15 +62,14 @@ export class SignUpPage {
     await this.monthSelect.selectOption(month);
     await this.yearSelect.selectOption(years);
     await this.firstName.fill(name);
-    await this.lastName.fill(lastName);
-    await this.company.fill(company);
+    await this.lastNameL.fill(lastName);
+    await this.companyL.fill(company);
     await this.address1.fill(adress);
-    await this.country.selectOption(country);
-    await this.state.fill(state);
-    await this.city.fill(city);
-    await this.zipcode.fill(zipCode);
+    await this.countryL.selectOption(country);
+    await this.stateL.fill(state);
+    await this.cityL.fill(city);
+    await this.zipCodeL.fill(zipCode);
     await this.mobileNumer.fill(phone);
     await this.buttonCreateAccount.click();
   }
-
 }

@@ -11,6 +11,7 @@ export class MainPage {
     '.features_items .productinfo .btn[data-product-id="1"]',
   );
   product4 = this.page.locator('.carousel-inner .productinfo .btn[data-product-id="4"]');
+  product15 = this.page.locator('.productinfo [data-product-id="15"]');
   vievCart = this.page.locator('.modal-body .text-center:nth-child(2)');
   
 }

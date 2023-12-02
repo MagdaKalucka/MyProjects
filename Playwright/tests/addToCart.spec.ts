@@ -6,7 +6,7 @@ import { EmailGenerator } from '../test-data/emailGenerator';
 import { MainPage } from '../pages/main.page';
 import { CartPage } from '../pages/cart.page';
 
-test.describe('Cart Page - login user', () => {
+test.describe('Added product to cart', () => {
   let loginSignUpPage;
   let email;
   let mainPage;
@@ -24,34 +24,21 @@ test.describe('Cart Page - login user', () => {
     mainPage = new MainPage(page);
     cartPage = new CartPage(page);
 
-    const day = '3';
-    const month = 'April';
-    const years = '1990';
-    const name = 'Mark';
-    const lastName = 'Jonnson';
-    const company = 'Star';
-    const adress = 'Morning 6';
-    const country = 'Canada';
-    const state = 'new';
-    const city = 'York';
-    const zipCode = '4444';
-    const phone = '123456789';
-
     await loginSignUpPage.singUp(userId, email);
     await signUpPage.singUpSuccefull(
       password,
-      day,
-      month,
-      years,
-      name,
-      lastName,
-      company,
-      adress,
-      country,
-      state,
-      city,
-      zipCode,
-      phone,
+      signUpPage.day,
+      signUpPage.month,
+      signUpPage.years,
+      signUpPage.name,
+      signUpPage.lastName,
+      signUpPage.company,
+      signUpPage.adress,
+      signUpPage.country,
+      signUpPage.state,
+      signUpPage.city,
+      signUpPage.zipCode,
+      signUpPage.phone,
     );
     await signUpPage.continue.click();
   });
@@ -73,16 +60,27 @@ test.describe('Cart Page - login user', () => {
     await mainPage.continueShopping.click();
   });
 
-  test('Added two products to card', async () => {
+  test('Added three products to card', async () => {
     //Arrange
 
     //Act
     await mainPage.product1.click();
     await mainPage.continueShopping.click();
     await mainPage.product4.click();
+    await mainPage.continueShopping.click();
+    await mainPage.product15.click();
     await mainPage.vievCart.click();
 
     //Asert
     await expect(cartPage.shoppingCart).toHaveText(cartPage.shoppingCartText);
   });
+
+  // test('Added products to card with sidebar menu', async () => {
+  //   //Arrange
+
+  //   //Act
+
+  //   //Asert
+  
+  // });
 });

@@ -1,7 +1,8 @@
 import { Page } from '@playwright/test';
 
-export class TopNavigationBar {
+export class SideMenu {
   constructor(private page: Page) {}
+  
   polo = this.page.getByRole('link', { name: '(6) Polo' });
   hm = this.page.getByRole('link', { name: '(5) H&M' });
   madame = this.page.getByRole('link', { name: '(5) Madame' });

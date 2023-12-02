@@ -25,34 +25,21 @@ test.describe('User Login page', () => {
   test('Successful sign in', async () => {
 
     //Arrange
-    const day = '3';
-    const month = 'April';
-    const years = '1990';
-    const name = 'Mark';
-    const lastName = 'Jonnson';
-    const company = 'Star';
-    const adress = 'Morning 6';
-    const country = 'Canada';
-    const state = 'new';
-    const city = 'York';
-    const zipCode = '4444';
-    const phone = '123456789';
-
     await loginSignUpPage.singUp(userId, email);
     await signUpPage.singUpSuccefull(
       password,
-      day,
-      month,
-      years,
-      name,
-      lastName,
-      company,
-      adress,
-      country,
-      state,
-      city,
-      zipCode,
-      phone,
+      signUpPage.day,
+      signUpPage.month,
+      signUpPage.years,
+      signUpPage.name,
+      signUpPage.lastName,
+      signUpPage.company,
+      signUpPage.adress,
+      signUpPage.country,
+      signUpPage.state,
+      signUpPage.city,
+      signUpPage.zipCode,
+      signUpPage.phone,
     );
     await signUpPage.continue.click();
     await loginSignUpPage.topNavigationBar.logout.click();
