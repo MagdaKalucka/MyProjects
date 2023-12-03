@@ -9,5 +9,7 @@ export class TopNavigationBar {
   loggedInUs = this.page.getByText('Logged in as');
   buttonContactUs = this.page.getByRole('link', { name: ' Contact us' });
   product = this.page.getByRole('link', { name: 'Products' });
+  cart = this.page.getByRole('link', { name: ' Cart' });
+
 
 }

@@ -9,7 +9,6 @@ test.describe('Contact us page', () => {
   let email;
   let loginSignUp;
   const userId = loginData.userId;
-  const message = 'Success! Your details have been submitted successfully.';
 
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
@@ -32,7 +31,7 @@ test.describe('Contact us page', () => {
     await contactUs.alertButton;
 
     //Asert
-    await expect(contactUs.message).toHaveText(message);
+    await expect(contactUs.message).toHaveText(contactUs.messageText);
   });
 
   test('Empty form', async () => {
@@ -72,6 +71,6 @@ test.describe('Contact us page', () => {
     await contactUs.alertButton;
 
     //Asert
-    await expect(contactUs.message).toHaveText(message);
+    await expect(contactUs.message).toHaveText(contactUs.messageText);
   });
 });

@@ -15,6 +15,7 @@ export class ContactUs {
     //.dismiss
   });
   message =  this.page.locator('#contact-page').getByText('Success! Your details have');
+  messageText = 'Success! Your details have been submitted successfully.';
   home = this.page.getByRole('link', { name: ' Home' });
 };
 

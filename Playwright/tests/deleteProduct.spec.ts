@@ -5,6 +5,7 @@ import { LoginSignUpPage } from '../pages/loginSignUp.page';
 import { EmailGenerator } from '../test-data/emailGenerator';
 import { MainPage } from '../pages/main.page';
 import { CartPage } from '../pages/cart.page';
+import { ProductPage } from '../pages/product.page';
 
 test.describe('Delete product from the cart', () => {
   let loginSignUpPage;
@@ -12,6 +13,7 @@ test.describe('Delete product from the cart', () => {
   let mainPage;
   let cartPage;
   let signUpPage;
+  let productPage;
   const userId = loginData.userId;
   const password = loginData.userPassword;
 
@@ -23,6 +25,7 @@ test.describe('Delete product from the cart', () => {
     signUpPage = new SignUpPage(page);
     mainPage = new MainPage(page);
     cartPage = new CartPage(page);
+    productPage = new ProductPage(page);
 
     await loginSignUpPage.singUp(userId, email);
     await signUpPage.singUpSuccefull(
@@ -52,7 +55,7 @@ test.describe('Delete product from the cart', () => {
     //Arrange
 
     //Act
-    await mainPage.product1.click();
+    await productPage.product1.click();
     await mainPage.vievCart.click();
     await cartPage.deleteProduct.click();
 
@@ -65,7 +68,7 @@ test.describe('Delete product from the cart', () => {
     //Arrange
 
     //Act
-    await mainPage.product1.click();
+    await productPage.product1.click();
     await mainPage.vievCart.click();
     await cartPage.deleteProduct.click();
     await cartPage.clickHere.click();
@@ -78,7 +81,7 @@ test.describe('Delete product from the cart', () => {
     //Arrange
 
     //Act
-    await mainPage.product1.click();
+    await productPage.product1.click();
     await mainPage.vievCart.click();
     await cartPage.deleteProduct.click();
     await cartPage.clickHere.click();

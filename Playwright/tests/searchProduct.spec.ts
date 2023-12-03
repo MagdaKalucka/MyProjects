@@ -10,10 +10,9 @@ test.describe('Search product', () => {
     await productPage.topNavigationBar.product.click();
   });
 
-  test('successful search', async () => {
+  test('Successful search', async () => {
     //Arrange
 
-const wpisz = 'frozen';
     //Act
     await productPage.search.fill(productPage.productName);
     await productPage.buttonSearch.click();
@@ -22,7 +21,7 @@ const wpisz = 'frozen';
 await expect(productPage.productTextL).toHaveText(productPage.productText)
   })
 
-    test('unsuccessful search', async () => {
+    test('Unsuccessful search', async () => {
         //Arrange
         
         //Act
