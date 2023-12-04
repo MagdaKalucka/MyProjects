@@ -18,7 +18,7 @@ test.describe('Contact us page', () => {
     email = emailGenerator.generateEmail();
   });
 
-  test('Successful sent message- full form', async () => {
+  test('Send message (successful) - Full form', async () => {
     //Arrange
 
     //Act
@@ -34,7 +34,7 @@ test.describe('Contact us page', () => {
     await expect(contactUs.message).toHaveText(contactUs.messageText);
   });
 
-  test('Empty form', async () => {
+  test('Send message (unsuccessful) - Empty form', async () => {
     //Act
     await contactUs.topNavigationBar.buttonContactUs.click();
     await contactUs.buttonSubmit.click();
@@ -52,7 +52,7 @@ test.describe('Contact us page', () => {
     // );
   });
 
-  test('Form without email', async () => {
+  test('Send message (unsuccessful) - Form without email', async () => {
     //Act
     await contactUs.topNavigationBar.buttonContactUs.click();
     await contactUs.contactName.fill(userId);
@@ -73,7 +73,7 @@ test.describe('Contact us page', () => {
       // );
   });
 
-  test('Form only with email', async () => {
+  test('Send message (unsuccessful) - Form only with email', async () => {
     //Arrange
 
     //Act

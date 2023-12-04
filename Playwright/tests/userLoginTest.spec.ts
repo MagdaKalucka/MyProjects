@@ -22,7 +22,7 @@ test.describe('User Login page', () => {
 
   });
 
-  test('Successful sign in', async () => {
+  test('Sign in (successful)', async () => {
 
     //Arrange
     await loginSignUpPage.singUp(userId, email);
@@ -59,7 +59,7 @@ test.describe('User Login page', () => {
     await signUpPage.continue.click();
   });
   
-  test('Uncorrect email - unsuccessful sign in', async () => {
+  test('Sign in (unsuccessful) - Uncorrect email', async () => {
     //Arrange
     const uncorrectEmail = 'user@gmail.com';
 
@@ -72,7 +72,7 @@ test.describe('User Login page', () => {
     );
   });
 
-  test('Empty password - unsuccessful sign in', async () => {
+  test('Sign in (unsuccessful) - Empty password', async () => {
     //Arrange
     const emptyPassword = '';
 
@@ -91,7 +91,7 @@ test.describe('User Login page', () => {
     // );
   });
 
-  test('Uncorrect password - unsuccessful sign in', async () => {
+  test('Sign in (unsuccessful) - Uncorrect password', async () => {
     //Arrange
     const uncorrectpassword = 'user';
 

@@ -51,7 +51,7 @@ test.describe('Add product to cart', () => {
     await signUpPage.continue.click();
   });
 
-  test('Add products to cart', async () => {
+  test('Add one products to cart', async () => {
     //Arrange
 
     //Act
@@ -63,7 +63,7 @@ test.describe('Add product to cart', () => {
     await mainPage.continueShopping.click();
   });
 
-  test('Add three products to card', async () => {
+  test('Add 3 products to cart', async () => {
     //Arrange
 
     //Act
@@ -78,7 +78,7 @@ test.describe('Add product to cart', () => {
     await expect(cartPage.shoppingCartLabel).toHaveText(cartPage.shoppingCartText);
   });
 
-  test('Add products to card after category', async () => {
+  test('Add products to cart by category', async () => {
     //Arrange
 
     //Act
@@ -101,7 +101,7 @@ test.describe('Add product to cart', () => {
     await expect(cartPage.countCartProduct).toHaveCount(3);
   });
 
-  test('Add products to card after brands', async () => {
+  test('Add products to cart by brands', async () => {
     //Arrange
 
     //Act
@@ -124,7 +124,7 @@ test.describe('Add product to cart', () => {
     //Asert
     await expect(cartPage.countCartProduct).toHaveCount(4);
   });
-  test('Add a lot of the same products', async () => {
+  test('Add 10 the same products', async () => {
     //Arrange
     const quantity: number = 10;
 

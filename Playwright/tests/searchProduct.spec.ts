@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { ProductPage } from '../pages/product.page';
 
-test.describe('Search product', () => {
+test.describe('Search product in product page', () => {
   let productPage;
 
   test.beforeEach(async ({ page }) => {
@@ -10,7 +10,7 @@ test.describe('Search product', () => {
     await productPage.topNavigationBar.product.click();
   });
 
-  test('Successful search', async () => {
+  test('Search product (successful)', async () => {
     //Arrange
 
     //Act
@@ -21,7 +21,7 @@ test.describe('Search product', () => {
     await expect(productPage.productTextL).toHaveText(productPage.productText);
   });
 
-  test('Unsuccessful search', async () => {
+  test('Search product (unsuccessful)', async () => {
     //Arrange
 
     //Act

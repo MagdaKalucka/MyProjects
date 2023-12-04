@@ -76,7 +76,7 @@ test.describe('Delete product from the cart', () => {
     await expect(productPage.topNavigationBar.product).toBeEnabled();
   });
 
-  test('Delete a lot of the same products', async () => {
+  test('Delete 10 the same products', async () => {
     //Arrange
     const quantity: number = 10;
     await productPage.sideMenu.women.click();
@@ -95,7 +95,7 @@ test.describe('Delete product from the cart', () => {
     await expect(cartPage.emptyCart).toHaveText(cartPage.emptyCartText);
   });
 
-  test('Delete several products', async () => {
+  test('Delete 4 products', async () => {
     //Arrange
     await productPage.sideMenu.women.click();
     await productPage.sideMenu.womenDress.click();

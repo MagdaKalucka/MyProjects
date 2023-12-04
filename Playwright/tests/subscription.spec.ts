@@ -14,7 +14,7 @@ test.describe('Subscription', () => {
     await page.goto('/');
   });
 
-  test('Subscription successful', async () => {
+  test('Send subscription (successful)', async () => {
     //Arrange
     const emailGenerator = new EmailGenerator();
     const email = emailGenerator.generateEmail();
@@ -27,7 +27,7 @@ test.describe('Subscription', () => {
     await expect(bottomNavigation.messageSentLabel).toHaveText(bottomNavigation.messageSentText);
   });
 
-  test('Subscription not full email', async () => {
+  test('Send subscription (unsuccessful) - Not full email', async () => {
     //Arrange
 
     //Act
@@ -47,7 +47,7 @@ test.describe('Subscription', () => {
     // );
   });
 
-  test('Subscription empty input', async () => {
+  test('Send subscription (unsuccessful) - Empty input', async () => {
     //Arrange
 
     //Act

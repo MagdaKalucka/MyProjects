@@ -18,7 +18,7 @@ test.describe('User sign up page', () => {
     signUpPage = new SignUpPage(page);
   });
 
-  test('Successful sign up', async () => {
+  test('Sign up (successful)', async () => {
     // Arrange
     const password = loginData.userPassword;
 
@@ -57,7 +57,7 @@ test.describe('User sign up page', () => {
     await loginSignUpPage.login(email, password);
   });
 
-  test('Uncorrect email - unsuccessful sign up', async () => {
+  test('Sign up (unsuccessful) - Uncorrect email', async () => {
     // Arrange
 
     //Act
@@ -76,7 +76,7 @@ test.describe('User sign up page', () => {
     // );
   });
 
-  test('Empty email - unsuccessful sign up', async () => {
+  test('Sign up (unsuccessful) - Empty email', async () => {
     // Arrange
     const emptyEmail = '';
 
@@ -95,7 +95,7 @@ test.describe('User sign up page', () => {
     // );
   });
 
-  test('Empty user - unsuccessful sign up', async () => {
+  test('Sign up (unsuccessful) - Empty user', async () => {
     // Arrange
     const emptyUserId = '';
 
@@ -118,7 +118,7 @@ test.describe('User sign up page', () => {
     // );
   });
 
-  test('User exists - unsuccessful sign up', async () => {
+  test('Sign up (unsuccessful) - User exists', async () => {
     //Arrange
     const password = loginData.userPassword;
     const messageUserExist = 'Email Address already exist!';
@@ -151,7 +151,7 @@ test.describe('User sign up page', () => {
     );
   });
 
-  test('Empty first name - unsuccessful sign up', async () => {
+  test('Sign up (unsuccessful) - Empty first name', async () => {
     //Arrange
     const password = loginData.userPassword;
     const emptyFirstName = '';

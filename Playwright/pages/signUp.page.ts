@@ -2,7 +2,7 @@ import { Page } from '@playwright/test';
 import { TopNavigationBar } from '../components/topNavigationBar.components';
 
 export class SignUpPage {
-  constructor(private page: Page) {}
+  constructor(private page: Page) { }
 
   topNavigationBar = new TopNavigationBar(this.page);
 
@@ -21,9 +21,7 @@ export class SignUpPage {
   cityInput = this.page.locator('#city');
   zipCodeInput = this.page.locator('#zipcode');
   mobileNumerInput = this.page.locator('#mobile_number');
-  buttonCreateAccount = this.page.getByRole('button', {
-    name: 'Create Account',
-  });
+  buttonCreateAccount = this.page.getByRole('button', { name: 'Create Account'});
   continue = this.page.getByRole('link', { name: 'Continue' });
   textAccountCreated = this.page.getByText('Account Created!');
   textCongratulation = this.page.getByText('Congratulations! Your new');

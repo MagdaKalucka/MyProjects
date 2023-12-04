@@ -18,7 +18,7 @@ test.describe('Delete account', () => {
     signUpPage = new SignUpPage(page);
   });
 
-  test('Delete account succesfull', async () => {
+  test('Delete account (succesfull)', async () => {
     // Arrange
     const password = loginData.userPassword;
 
