@@ -34,6 +34,7 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    locale: 'en-GB',
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://www.automationexercise.com',
 
@@ -58,8 +59,10 @@ export default defineConfig({
         name: 'chromium',
         use: {
            ...devices['Desktop Chrome'],
-           testIdAttribute: 'data-qa', },      
+           testIdAttribute: 'data-qa', 
+           locale: 'en-GB', }
       },
+
 
     // {
     //   name: 'firefox',

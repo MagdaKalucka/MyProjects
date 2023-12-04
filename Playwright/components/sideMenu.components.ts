@@ -2,7 +2,7 @@ import { Page } from '@playwright/test';
 
 export class SideMenu {
   constructor(private page: Page) {}
-  
+
   women = this.page.getByRole('link', { name: ' Women' });
   womenMain = this.page.getByRole('heading', { name: ' Women' });
   womenDress = this.page.getByRole('link', { name: 'Dress' });

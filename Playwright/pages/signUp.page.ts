@@ -6,21 +6,21 @@ export class SignUpPage {
 
   topNavigationBar = new TopNavigationBar(this.page);
 
-  idGender1 = this.page.locator('#id_gender1');
-  idGender2 = this.page.locator('#id_gender2');
-  passwordSignUp = this.page.locator('#password');
+  idGender1Input = this.page.locator('#id_gender1');
+  idGender2Input = this.page.locator('#id_gender2');
+  passwordSignUpInput = this.page.locator('#password');
   daySelect = this.page.locator('#days');
   monthSelect = this.page.locator('#months');
   yearSelect = this.page.locator('#years');
-  firstName = this.page.locator('#first_name');
-  lastNameL = this.page.locator('#last_name');
-  companyL = this.page.locator('#company');
-  address1 = this.page.locator('#address1');
-  countryL = this.page.locator('#country');
-  stateL = this.page.locator('#state');
-  cityL = this.page.locator('#city');
-  zipCodeL = this.page.locator('#zipcode');
-  mobileNumer = this.page.locator('#mobile_number');
+  firstNameInput = this.page.locator('#first_name');
+  lastNameInput = this.page.locator('#last_name');
+  companyInput = this.page.locator('#company');
+  address1Input = this.page.locator('#address1');
+  countryInput = this.page.locator('#country');
+  stateInput = this.page.locator('#state');
+  cityInput = this.page.locator('#city');
+  zipCodeInput = this.page.locator('#zipcode');
+  mobileNumerInput = this.page.locator('#mobile_number');
   buttonCreateAccount = this.page.getByRole('button', {
     name: 'Create Account',
   });
@@ -56,20 +56,20 @@ export class SignUpPage {
     zipCode: string,
     phone: string,
   ): Promise<void> {
-    await this.idGender1.check();
-    await this.passwordSignUp.fill(password);
+    await this.idGender1Input.check();
+    await this.passwordSignUpInput.fill(password);
     await this.daySelect.selectOption(day);
     await this.monthSelect.selectOption(month);
     await this.yearSelect.selectOption(years);
-    await this.firstName.fill(name);
-    await this.lastNameL.fill(lastName);
-    await this.companyL.fill(company);
-    await this.address1.fill(adress);
-    await this.countryL.selectOption(country);
-    await this.stateL.fill(state);
-    await this.cityL.fill(city);
-    await this.zipCodeL.fill(zipCode);
-    await this.mobileNumer.fill(phone);
+    await this.firstNameInput.fill(name);
+    await this.lastNameInput.fill(lastName);
+    await this.companyInput.fill(company);
+    await this.address1Input.fill(adress);
+    await this.countryInput.selectOption(country);
+    await this.stateInput.fill(state);
+    await this.cityInput.fill(city);
+    await this.zipCodeInput.fill(zipCode);
+    await this.mobileNumerInput.fill(phone);
     await this.buttonCreateAccount.click();
   }
 }

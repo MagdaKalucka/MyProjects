@@ -61,7 +61,6 @@ test.describe('Delete product from the cart', () => {
 
     //Asert
     await expect(cartPage.emptyCart).toHaveText(cartPage.emptyCartText);
-;
   });
 
   test('Delete product and continue shopping', async () => {
@@ -74,20 +73,52 @@ test.describe('Delete product from the cart', () => {
     await cartPage.clickHere.click();
 
     //Asert
-    //await expect(cartPage.shoppingCart).toHaveText(cartPage.shoppingCartText);
+    await expect(productPage.topNavigationBar.product).toBeEnabled();
   });
 
-  test('Delete product and continue', async () => {
+  test('Delete a lot of the same products', async () => {
     //Arrange
+    const quantity: number = 10;
+    await productPage.sideMenu.women.click();
+    await productPage.sideMenu.womenDress.click();
+
+    for (let i = 0; i < quantity; i++) {
+      await productPage.product3Women.click();
+      await mainPage.continueShopping.click();
+    }
+    await productPage.topNavigationBar.cart.click();
 
     //Act
-    await productPage.product1.click();
-    await mainPage.vievCart.click();
     await cartPage.deleteProduct.click();
-    await cartPage.clickHere.click();
 
     //Asert
-    //await expect(cartPage.shoppingCart).toHaveText(cartPage.shoppingCartText);
+    await expect(cartPage.emptyCart).toHaveText(cartPage.emptyCartText);
   });
 
+  test('Delete several products', async () => {
+    //Arrange
+    await productPage.sideMenu.women.click();
+    await productPage.sideMenu.womenDress.click();
+    await productPage.product3Women.click();
+    await mainPage.continueShopping.click();
+
+    await productPage.sideMenu.men.click();
+    await productPage.sideMenu.menJeans.click();
+    await productPage.product35Men.click();
+    await mainPage.continueShopping.click();
+
+    await productPage.sideMenu.kids.click();
+    await productPage.sideMenu.kidsTopShirts.click();
+    await productPage.product15.click();
+    await mainPage.vievCart.click();
+
+    //Act
+    await cartPage.deleteProduct.nth(2).click();
+    await cartPage.deleteProduct.nth(1).click();
+    await cartPage.deleteProduct.nth(0).click();
+    await cartPage.emptyCart.click();
+
+    //Asert
+    await expect(cartPage.emptyCart).toHaveText(cartPage.emptyCartText);
+  });
 });

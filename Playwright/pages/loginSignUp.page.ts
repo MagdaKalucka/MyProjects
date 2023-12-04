@@ -19,8 +19,11 @@ export class LoginSignUpPage {
   message: string = 'Your email or password is incorrect!';
   errorMessageExist = this.page.getByText('Email Address already exist!');
   valueMissingMessage: string = 'Wypełnij to pole.';
+  valueMissingMessageEng: string = 'Please fill out this field.';
+
   uncorrectEmail: string = 'userexample123';
   typeMismatchMessage: string = `Uwzględnij znak „@” w adresie e-mail. W adresie „${this.uncorrectEmail}” brakuje znaku „@”.`;
+  typeMismatchMessageEng: string = `Please include an '@' in the email address. '${this.uncorrectEmail}' is missing an '@'.`;
 
   async singUp(userId: string, email: string): Promise<void> {
     await this.topNavigationBar.buttonSignupLogin.click();

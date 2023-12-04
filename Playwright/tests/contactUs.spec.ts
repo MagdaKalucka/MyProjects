@@ -18,7 +18,7 @@ test.describe('Contact us page', () => {
     email = emailGenerator.generateEmail();
   });
 
-  test('Successful sent the message- full form', async () => {
+  test('Successful sent message- full form', async () => {
     //Arrange
 
     //Act
@@ -40,10 +40,16 @@ test.describe('Contact us page', () => {
     await contactUs.buttonSubmit.click();
 
     //Assert
+
     await expect(contactUs.contactEmail).toHaveJSProperty(
       'validationMessage',
-      loginSignUp.valueMissingMessage,
+      loginSignUp.valueMissingMessageEng,
     );
+
+    // await expect(contactUs.contactEmail).toHaveJSProperty(
+    //   'validationMessage',
+    //   loginSignUp.valueMissingMessage,
+    // );
   });
 
   test('Form without email', async () => {
@@ -55,10 +61,16 @@ test.describe('Contact us page', () => {
     await contactUs.buttonSubmit.click();
 
     //Assert
-    await expect(contactUs.contactEmail).toHaveJSProperty(
-      'validationMessage',
-      loginSignUp.valueMissingMessage,
-    );
+
+      await expect(contactUs.contactEmail).toHaveJSProperty(
+        'validationMessage',
+        loginSignUp.valueMissingMessageEng,
+      );
+    
+      // await expect(contactUs.contactEmail).toHaveJSProperty(
+      //   'validationMessage',
+      //   loginSignUp.valueMissingMessage,
+      // );
   });
 
   test('Form only with email', async () => {

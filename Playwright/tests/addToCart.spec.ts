@@ -7,7 +7,7 @@ import { MainPage } from '../pages/main.page';
 import { CartPage } from '../pages/cart.page';
 import { ProductPage } from '../pages/product.page';
 
-test.describe('Added product to cart', () => {
+test.describe('Add product to cart', () => {
   let loginSignUpPage;
   let email;
   let mainPage;
@@ -51,7 +51,7 @@ test.describe('Added product to cart', () => {
     await signUpPage.continue.click();
   });
 
-  test('Added products to cart', async () => {
+  test('Add products to cart', async () => {
     //Arrange
 
     //Act
@@ -63,7 +63,7 @@ test.describe('Added product to cart', () => {
     await mainPage.continueShopping.click();
   });
 
-  test('Added three products to card', async () => {
+  test('Add three products to card', async () => {
     //Arrange
 
     //Act
@@ -75,71 +75,71 @@ test.describe('Added product to cart', () => {
     await mainPage.vievCart.click();
 
     //Asert
-    await expect(cartPage.shoppingCart).toHaveText(cartPage.shoppingCartText);
+    await expect(cartPage.shoppingCartLabel).toHaveText(cartPage.shoppingCartText);
   });
 
-  test('Added products to card after category', async () => {
+  test('Add products to card after category', async () => {
     //Arrange
 
     //Act
-await productPage.sideMenu.women.click();
-await productPage.sideMenu.womenDress.click();
-await productPage.product3Women.click();
-await mainPage.continueShopping.click();
+    await productPage.sideMenu.women.click();
+    await productPage.sideMenu.womenDress.click();
+    await productPage.product3Women.click();
+    await mainPage.continueShopping.click();
 
-await productPage.sideMenu.men.click();
-await productPage.sideMenu.menJeans.click();
-await productPage.product35Men.click();
-await mainPage.continueShopping.click();
+    await productPage.sideMenu.men.click();
+    await productPage.sideMenu.menJeans.click();
+    await productPage.product35Men.click();
+    await mainPage.continueShopping.click();
 
-await productPage.sideMenu.kids.click();
-await productPage.sideMenu.kidsTopShirts.click();
-await productPage.product15.click();
-await mainPage.vievCart.click();
+    await productPage.sideMenu.kids.click();
+    await productPage.sideMenu.kidsTopShirts.click();
+    await productPage.product15.click();
+    await mainPage.vievCart.click();
 
     //Asert
-  
+    await expect(cartPage.countCartProduct).toHaveCount(3);
   });
 
-  test('Added products to card after brands', async () => {
+  test('Add products to card after brands', async () => {
     //Arrange
 
     //Act
-await productPage.sideMenu.polo.click();
-await productPage.product8Polo.click();
-await mainPage.continueShopping.click();
+    await productPage.sideMenu.polo.click();
+    await productPage.product8Polo.click();
+    await mainPage.continueShopping.click();
 
-await productPage.sideMenu.madame.click();
-await productPage.product38Madame.click();
-await mainPage.continueShopping.click();
+    await productPage.sideMenu.madame.click();
+    await productPage.product38Madame.click();
+    await mainPage.continueShopping.click();
 
-await productPage.sideMenu.babyhug.click();
-await productPage.product15.click();
-await mainPage.continueShopping.click();
+    await productPage.sideMenu.babyhug.click();
+    await productPage.product15.click();
+    await mainPage.continueShopping.click();
 
-await productPage.sideMenu.biba.click();
-await productPage.product40Biba.click();
-await mainPage.vievCart.click();
+    await productPage.sideMenu.biba.click();
+    await productPage.product40Biba.click();
+    await mainPage.vievCart.click();
+
     //Asert
-  
+    await expect(cartPage.countCartProduct).toHaveCount(4);
   });
-  test('Added a lot of the same products', async () => {
+  test('Add a lot of the same products', async () => {
     //Arrange
-const quantity: number = 10;
+    const quantity: number = 10;
 
     //Act
     await productPage.sideMenu.women.click();
     await productPage.sideMenu.womenDress.click();
 
-    for (let i = 0; i < quantity; i++ ) {
-    await productPage.product3Women.click();
-    await mainPage.continueShopping.click();
+    for (let i = 0; i < quantity; i++) {
+      await productPage.product3Women.click();
+      await mainPage.continueShopping.click();
     }
 
     await productPage.topNavigationBar.cart.click();
 
     //Asert
-  await expect(cartPage.quantityProduct3).toHaveText(`${quantity}`);
+    await expect(cartPage.quantityProduct3).toHaveText(`${quantity}`);
   });
-
 });

@@ -58,6 +58,7 @@ test.describe('User Login page', () => {
     await signUpPage.topNavigationBar.deleteAccount.click();
     await signUpPage.continue.click();
   });
+  
   test('Uncorrect email - unsuccessful sign in', async () => {
     //Arrange
     const uncorrectEmail = 'user@gmail.com';
@@ -81,8 +82,13 @@ test.describe('User Login page', () => {
     //Assert
     await expect(loginSignUpPage.inputPassword).toHaveJSProperty(
       'validationMessage',
-      loginSignUpPage.valueMissingMessage,
+      loginSignUpPage.valueMissingMessageEng,
     );
+
+    // await expect(loginSignUpPage.inputPassword).toHaveJSProperty(
+    //   'validationMessage',
+    //   loginSignUpPage.valueMissingMessage,
+    // );
   });
 
   test('Uncorrect password - unsuccessful sign in', async () => {

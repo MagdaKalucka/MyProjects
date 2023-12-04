@@ -18,14 +18,13 @@ test.describe('Subscription', () => {
     //Arrange
     const emailGenerator = new EmailGenerator();
     const email = emailGenerator.generateEmail();
-    const message = 'You have been successfully subscribed!';
 
     //Act
     await bottomNavigation.inputSubscription.fill(email);
     await bottomNavigation.buttonSend.click();
 
     //Asert
-    await expect(bottomNavigation.messageSent).toHaveText(message);
+    await expect(bottomNavigation.messageSentLabel).toHaveText(bottomNavigation.messageSentText);
   });
 
   test('Subscription not full email', async () => {
@@ -36,10 +35,16 @@ test.describe('Subscription', () => {
     await bottomNavigation.buttonSend.click();
 
     //Assert
+
     await expect(bottomNavigation.inputSubscription).toHaveJSProperty(
       'validationMessage',
-      loginSignUp.typeMismatchMessage,
+      loginSignUp.typeMismatchMessageEng,
     );
+
+    // await expect(bottomNavigation.inputSubscription).toHaveJSProperty(
+    //   'validationMessage',
+    //   loginSignUp.typeMismatchMessage,
+    // );
   });
 
   test('Subscription empty input', async () => {
@@ -48,9 +53,16 @@ test.describe('Subscription', () => {
     //Act
     await bottomNavigation.buttonSend.click();
 
+    //Assert
+
     await expect(bottomNavigation.inputSubscription).toHaveJSProperty(
       'validationMessage',
-      loginSignUp.valueMissingMessage,
+      loginSignUp.valueMissingMessageEng,
     );
+
+    // await expect(bottomNavigation.inputSubscription).toHaveJSProperty(
+    //   'validationMessage',
+    //   loginSignUp.valueMissingMessage,
+    // );
   });
 });

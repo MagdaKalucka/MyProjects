@@ -18,17 +18,16 @@ test.describe('Search product', () => {
     await productPage.buttonSearch.click();
 
     //Assert
-await expect(productPage.productTextL).toHaveText(productPage.productText)
-  })
-
-    test('Unsuccessful search', async () => {
-        //Arrange
-        
-        //Act
-        await productPage.search.fill(productPage.badProductName);
-        await productPage.buttonSearch.click();
-    
-        //Assert
+    await expect(productPage.productTextL).toHaveText(productPage.productText);
   });
 
+  test('Unsuccessful search', async () => {
+    //Arrange
+
+    //Act
+    await productPage.search.fill(productPage.badProductName);
+    await productPage.buttonSearch.click();
+
+    //Assert
+  });
 });
