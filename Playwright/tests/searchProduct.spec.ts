@@ -29,5 +29,6 @@ test.describe('Search product in product page', () => {
     await productPage.buttonSearch.click();
 
     //Assert
+
   });
 });

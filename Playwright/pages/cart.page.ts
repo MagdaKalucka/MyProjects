@@ -4,7 +4,7 @@ export class CartPage {
   constructor(private page: Page) {}
 
   homeLink = this.page.getByRole('link', { name: 'Home' });
-  shoppingCartLabel = this.page.locator('.active');
+  textLabel = this.page.locator('.active');
   shoppingCartText: string = 'Shopping Cart';
   deleteProduct = this.page.locator('.cart_quantity_delete .fa ');
   //emptyCart = this.page.getByText('Cart is empty!');
@@ -13,4 +13,6 @@ export class CartPage {
   clickHere = this.page.getByRole('link', { name: 'here' });
   quantityProduct3 = this.page.locator('#product-3 .disabled');
   countCartProduct = this.page.locator('.cart_product');
+  buttonProceedToCheckout = this.page.locator('#do_action .btn').getByText('Proceed To Checkout');
+  checkoutText = 'Checkout';
 }

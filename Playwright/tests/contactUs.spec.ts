@@ -35,21 +35,16 @@ test.describe('Contact us page', () => {
   });
 
   test('Send message (unsuccessful) - Empty form', async () => {
+    
     //Act
     await contactUs.topNavigationBar.buttonContactUs.click();
     await contactUs.buttonSubmit.click();
 
     //Assert
-
     await expect(contactUs.contactEmail).toHaveJSProperty(
       'validationMessage',
-      loginSignUp.valueMissingMessageEng,
+      loginSignUp.valueMissingMessage,
     );
-
-    // await expect(contactUs.contactEmail).toHaveJSProperty(
-    //   'validationMessage',
-    //   loginSignUp.valueMissingMessage,
-    // );
   });
 
   test('Send message (unsuccessful) - Form without email', async () => {
@@ -61,19 +56,14 @@ test.describe('Contact us page', () => {
     await contactUs.buttonSubmit.click();
 
     //Assert
-
+    
       await expect(contactUs.contactEmail).toHaveJSProperty(
         'validationMessage',
-        loginSignUp.valueMissingMessageEng,
+        loginSignUp.valueMissingMessage,
       );
-    
-      // await expect(contactUs.contactEmail).toHaveJSProperty(
-      //   'validationMessage',
-      //   loginSignUp.valueMissingMessage,
-      // );
   });
 
-  test('Send message (unsuccessful) - Form only with email', async () => {
+  test('Send message (successful) - Form only with email', async () => {
     //Arrange
 
     //Act
@@ -86,3 +76,4 @@ test.describe('Contact us page', () => {
     await expect(contactUs.message).toHaveText(contactUs.messageText);
   });
 });
+

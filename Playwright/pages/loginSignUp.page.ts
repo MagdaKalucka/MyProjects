@@ -5,36 +5,38 @@ export class LoginSignUpPage {
   constructor(private page: Page) {}
   topNavigationBar = new TopNavigationBar(this.page);
 
-  inputName = this.page.getByPlaceholder('Name');
-  inputEmail = this.page.locator(".signup-form input[name='email']");
-  buttonSignup = this.page.getByRole('button', { name: 'Signup' });
+  nameInput = this.page.getByPlaceholder('Name');
+  emailAddressInput = this.page.locator(".signup-form input[name='email']");
+  signupButton = this.page.getByRole('button', { name: 'Signup' });
 
-  inputLogin = this.page
-    .locator('form')
-    .filter({ hasText: 'Login' })
-    .getByPlaceholder('Email Address');
-  inputPassword = this.page.getByPlaceholder('Password');
-  buttonLogin = this.page.getByRole('button', { name: 'Login' });
+  emailLoginInput = this.page.getByTestId('login-email');
+  passwordInput = this.page.getByPlaceholder('Password');
+  loginButton = this.page.getByRole('button', { name: 'Login' });
   errorMessage = this.page.getByText('Your email or password is');
   message: string = 'Your email or password is incorrect!';
   errorMessageExist = this.page.getByText('Email Address already exist!');
-  valueMissingMessage: string = 'Wypełnij to pole.';
-  valueMissingMessageEng: string = 'Please fill out this field.';
+  //valueMissingMessage: string = 'Wypełnij to pole.';
+  //valueMissingMessageEng: string = 'Please fill out this field.';
+  // typeMismatchMessage: string = `Uwzględnij znak „@” w adresie e-mail. W adresie „${this.uncorrectEmail}” brakuje znaku „@”.`;
+  // typeMismatchMessageEng: string = `Please include an '@' in the email address. '${this.uncorrectEmail}' is missing an '@'.`;
+  
+  missingMessageBrowser: string = process.env.BROWSER === 'default' ? 'Wypełnij to pole.' : 'Please fill out this field.';
+  valueMissingMessage: string = this.missingMessageBrowser;
 
   uncorrectEmail: string = 'userexample123';
-  typeMismatchMessage: string = `Uwzględnij znak „@” w adresie e-mail. W adresie „${this.uncorrectEmail}” brakuje znaku „@”.`;
-  typeMismatchMessageEng: string = `Please include an '@' in the email address. '${this.uncorrectEmail}' is missing an '@'.`;
+  mismatchMessageBrowser: string = process.env.BROWSER === 'default' ? `Uwzględnij znak „@” w adresie e-mail. W adresie „${this.uncorrectEmail}” brakuje znaku „@”.` : `Please include an '@' in the email address. '${this.uncorrectEmail}' is missing an '@'.` ;
+  typeMismatchMessage: string = this.mismatchMessageBrowser
 
   async singUp(userId: string, email: string): Promise<void> {
     await this.topNavigationBar.buttonSignupLogin.click();
-    await this.inputName.fill(userId);
-    await this.inputEmail.fill(email);
-    await this.buttonSignup.click();
+    await this.nameInput.fill(userId);
+    await this.emailAddressInput.fill(email);
+    await this.signupButton.click();
   }
 
   async login(email: string, password: string): Promise<void> {
-    await this.inputLogin.fill(email);
-    await this.inputPassword.fill(password);
-    await this.buttonLogin.click();
+    await this.emailLoginInput.fill(email);
+    await this.passwordInput.fill(password);
+    await this.loginButton.click();
   }
 }

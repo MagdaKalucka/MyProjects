@@ -95,7 +95,7 @@ test.describe('Delete product from the cart', () => {
     await expect(cartPage.emptyCart).toHaveText(cartPage.emptyCartText);
   });
 
-  test('Delete 4 products', async () => {
+  test('Delete 3 products', async () => {
     //Arrange
     await productPage.sideMenu.women.click();
     await productPage.sideMenu.womenDress.click();
@@ -113,6 +113,19 @@ test.describe('Delete product from the cart', () => {
     await mainPage.vievCart.click();
 
     //Act
+    // for (let i = 3; i > 0; i--) {
+    //   await cartPage.deleteProduct.nth(0).click();
+    // }
+
+    // while ((await cartPage.deleteProduct.count()) > 0) {
+    //   await cartPage.deleteProduct.nth(0).click();
+    // }
+
+    // let i: number = 2;
+    // i--;
+    // while ( i > 0) {
+    // await cartPage.deleteProduct.nth(0).click()}
+
     await cartPage.deleteProduct.nth(2).click();
     await cartPage.deleteProduct.nth(1).click();
     await cartPage.deleteProduct.nth(0).click();

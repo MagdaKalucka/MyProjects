@@ -75,7 +75,7 @@ test.describe('Add product to cart', () => {
     await mainPage.vievCart.click();
 
     //Asert
-    await expect(cartPage.shoppingCartLabel).toHaveText(cartPage.shoppingCartText);
+    await expect(cartPage.textLabel).toHaveText(cartPage.shoppingCartText);
   });
 
   test('Add products to cart by category', async () => {

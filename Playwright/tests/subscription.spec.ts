@@ -38,13 +38,8 @@ test.describe('Subscription', () => {
 
     await expect(bottomNavigation.inputSubscription).toHaveJSProperty(
       'validationMessage',
-      loginSignUp.typeMismatchMessageEng,
+      loginSignUp.typeMismatchMessage,
     );
-
-    // await expect(bottomNavigation.inputSubscription).toHaveJSProperty(
-    //   'validationMessage',
-    //   loginSignUp.typeMismatchMessage,
-    // );
   });
 
   test('Send subscription (unsuccessful) - Empty input', async () => {
@@ -57,12 +52,7 @@ test.describe('Subscription', () => {
 
     await expect(bottomNavigation.inputSubscription).toHaveJSProperty(
       'validationMessage',
-      loginSignUp.valueMissingMessageEng,
+      loginSignUp.valueMissingMessage,
     );
-
-    // await expect(bottomNavigation.inputSubscription).toHaveJSProperty(
-    //   'validationMessage',
-    //   loginSignUp.valueMissingMessage,
-    // );
   });
 });

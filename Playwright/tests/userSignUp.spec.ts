@@ -65,15 +65,10 @@ test.describe('User sign up page', () => {
 
     //Assert
 
-    await expect(loginSignUpPage.inputEmail).toHaveJSProperty(
+    await expect(loginSignUpPage.emailAddressInput).toHaveJSProperty(
       'validationMessage',
-      loginSignUpPage.typeMismatchMessageEng,
+      loginSignUpPage.typeMismatchMessage,
     );
-
-    // await expect(loginSignUpPage.inputEmail).toHaveJSProperty(
-    //   'validationMessage',
-    //   loginSignUpPage.typeMismatchMessage,
-    // );
   });
 
   test('Sign up (unsuccessful) - Empty email', async () => {
@@ -84,15 +79,10 @@ test.describe('User sign up page', () => {
     await loginSignUpPage.singUp(userId, emptyEmail);
 
     //Assert
-    await expect(loginSignUpPage.inputEmail).toHaveJSProperty(
+    await expect(loginSignUpPage.emailAddressInput).toHaveJSProperty(
       'validationMessage',
-      loginSignUpPage.valueMissingMessageEng,
+      loginSignUpPage.valueMissingMessage,
     );
-
-    // await expect(loginSignUpPage.inputEmail).toHaveJSProperty(
-    //   'validationMessage',
-    //   loginSignUpPage.valueMissingMessage,
-    // );
   });
 
   test('Sign up (unsuccessful) - Empty user', async () => {
@@ -103,19 +93,13 @@ test.describe('User sign up page', () => {
     await loginSignUpPage.singUp(emptyUserId, email);
 
     //Assert
-    await expect(loginSignUpPage.inputName).toBeEmpty();
-    await expect(loginSignUpPage.buttonSignup).toContainText('Signup');
-    await expect(loginSignUpPage.buttonSignup).toBeEnabled();
+    await expect(loginSignUpPage.signupButton).toContainText('Signup');
+    await expect(loginSignUpPage.signupButton).toBeEnabled();
 
-    await expect(loginSignUpPage.inputPassword).toHaveJSProperty(
+    await expect(loginSignUpPage.passwordInput).toHaveJSProperty(
       'validationMessage',
-      loginSignUpPage.valueMissingMessageEng,
+      loginSignUpPage.valueMissingMessage,
     );
-
-    // await expect(loginSignUpPage.inputPassword).toHaveJSProperty(
-    //   'validationMessage',
-    //   loginSignUpPage.valueMissingMessage,
-    // );
   });
 
   test('Sign up (unsuccessful) - User exists', async () => {
@@ -175,16 +159,10 @@ test.describe('User sign up page', () => {
     );
 
     //Assert
-    //This is assert to english version browser.
     await expect(signUpPage.firstNameInput).toHaveJSProperty(
       'validationMessage',
-      loginSignUpPage.valueMissingMessageEng,
+      loginSignUpPage.valueMissingMessage,
     );
-    //This is assert to polish version browser.
-    // await expect(signUpPage.firstNameInput).toHaveJSProperty(
-    //   'validationMessage',
-    //   loginSignUpPage.valueMissingMessage,
-    // );
   });
 
   /* I should write more tests about empty field but each tests will be this same it will only different name of field. */

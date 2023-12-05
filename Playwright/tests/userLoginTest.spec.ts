@@ -80,15 +80,10 @@ test.describe('User Login page', () => {
     await loginSignUpPage.login(email, emptyPassword);
 
     //Assert
-    await expect(loginSignUpPage.inputPassword).toHaveJSProperty(
+    await expect(loginSignUpPage.passwordInput).toHaveJSProperty(
       'validationMessage',
-      loginSignUpPage.valueMissingMessageEng,
+      loginSignUpPage.valueMissingMessage,
     );
-
-    // await expect(loginSignUpPage.inputPassword).toHaveJSProperty(
-    //   'validationMessage',
-    //   loginSignUpPage.valueMissingMessage,
-    // );
   });
 
   test('Sign in (unsuccessful) - Uncorrect password', async () => {
