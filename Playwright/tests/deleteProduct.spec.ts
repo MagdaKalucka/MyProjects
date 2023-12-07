@@ -8,12 +8,12 @@ import { CartPage } from '../pages/cart.page';
 import { ProductPage } from '../pages/product.page';
 
 test.describe('Delete product from the cart', () => {
-  let loginSignUpPage;
+  let loginSignUpPage: LoginSignUpPage;
+  let mainPage: MainPage;
+  let cartPage: CartPage;
+  let signUpPage: SignUpPage;
+  let productPage: ProductPage;
   let email;
-  let mainPage;
-  let cartPage;
-  let signUpPage;
-  let productPage;
   const userId = loginData.userId;
   const password = loginData.userPassword;
 
@@ -43,12 +43,12 @@ test.describe('Delete product from the cart', () => {
       signUpPage.zipCode,
       signUpPage.phone,
     );
-    await signUpPage.continue.click();
+    await signUpPage.continueButton.click();
   });
 
   test.afterEach(async () => {
-    await signUpPage.topNavigationBar.deleteAccount.click();
-    await signUpPage.continue.click();
+    await signUpPage.topNavigationBar.deleteAccountLink.click();
+    await signUpPage.continueButton.click();
   });
 
   test('Delete produt', async () => {
@@ -56,7 +56,7 @@ test.describe('Delete product from the cart', () => {
 
     //Act
     await productPage.product1.click();
-    await mainPage.vievCart.click();
+    await mainPage.vievCartLink.click();
     await cartPage.deleteProduct.click();
 
     //Asert
@@ -68,12 +68,12 @@ test.describe('Delete product from the cart', () => {
 
     //Act
     await productPage.product1.click();
-    await mainPage.vievCart.click();
+    await mainPage.vievCartLink.click();
     await cartPage.deleteProduct.click();
-    await cartPage.clickHere.click();
+    await cartPage.clickHereLink.click();
 
     //Asert
-    await expect(productPage.topNavigationBar.product).toBeEnabled();
+    await expect(productPage.topNavigationBar.productLink).toBeEnabled();
   });
 
   test('Delete 10 the same products', async () => {
@@ -86,7 +86,7 @@ test.describe('Delete product from the cart', () => {
       await productPage.product3Women.click();
       await mainPage.continueShopping.click();
     }
-    await productPage.topNavigationBar.cart.click();
+    await productPage.topNavigationBar.cartLink.click();
 
     //Act
     await cartPage.deleteProduct.click();
@@ -110,25 +110,18 @@ test.describe('Delete product from the cart', () => {
     await productPage.sideMenu.kids.click();
     await productPage.sideMenu.kidsTopShirts.click();
     await productPage.product15.click();
-    await mainPage.vievCart.click();
+    await mainPage.vievCartLink.click();
+
+    let number: number = 2; ;
 
     //Act
-    // for (let i = 3; i > 0; i--) {
-    //   await cartPage.deleteProduct.nth(0).click();
-    // }
-
-    // while ((await cartPage.deleteProduct.count()) > 0) {
-    //   await cartPage.deleteProduct.nth(0).click();
-    // }
-
-    // let i: number = 2;
-    // i--;
-    // while ( i > 0) {
-    // await cartPage.deleteProduct.nth(0).click()}
-
-    await cartPage.deleteProduct.nth(2).click();
-    await cartPage.deleteProduct.nth(1).click();
-    await cartPage.deleteProduct.nth(0).click();
+    for (let i = 0; i < 3; i++) {
+      await cartPage.deleteProduct.nth(number).click();
+      number--;
+    }
+    // await cartPage.deleteProduct.nth(2).click();
+    // await cartPage.deleteProduct.nth(1).click();
+    // await cartPage.deleteProduct.nth(0).click();
     await cartPage.emptyCart.click();
 
     //Asert

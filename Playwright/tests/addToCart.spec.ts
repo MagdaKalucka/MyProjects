@@ -8,17 +8,16 @@ import { CartPage } from '../pages/cart.page';
 import { ProductPage } from '../pages/product.page';
 
 test.describe('Add product to cart', () => {
-  let loginSignUpPage;
+  let loginSignUpPage: LoginSignUpPage;
+  let mainPage: MainPage;
+  let cartPage: CartPage;
+  let signUpPage: SignUpPage;
+  let productPage: ProductPage;
   let email;
-  let mainPage;
-  let cartPage;
-  let signUpPage;
-  let productPage;
   const userId = loginData.userId;
   const password = loginData.userPassword;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
     const emailGenerator = new EmailGenerator();
     email = emailGenerator.generateEmail();
     loginSignUpPage = new LoginSignUpPage(page);
@@ -26,6 +25,8 @@ test.describe('Add product to cart', () => {
     mainPage = new MainPage(page);
     cartPage = new CartPage(page);
     productPage = new ProductPage(page);
+
+    await page.goto('/');
 
     await loginSignUpPage.singUp(userId, email);
     await signUpPage.singUpSuccefull(
@@ -43,12 +44,12 @@ test.describe('Add product to cart', () => {
       signUpPage.zipCode,
       signUpPage.phone,
     );
-    await signUpPage.continue.click();
+    await signUpPage.continueButton.click();
   });
 
   test.afterEach(async () => {
-    await signUpPage.topNavigationBar.deleteAccount.click();
-    await signUpPage.continue.click();
+    await signUpPage.topNavigationBar.deleteAccountLink.click();
+    await signUpPage.continueButton.click();
   });
 
   test('Add one products to cart', async () => {
@@ -58,7 +59,7 @@ test.describe('Add product to cart', () => {
     await productPage.product1.click();
 
     //Asert
-    await expect(mainPage.messageAdded).toHaveText(mainPage.messageAddedText);
+    await expect(mainPage.messageAddLabel).toHaveText(mainPage.messageAddText);
 
     await mainPage.continueShopping.click();
   });
@@ -72,7 +73,7 @@ test.describe('Add product to cart', () => {
     await productPage.product4.click();
     await mainPage.continueShopping.click();
     await productPage.product15.click();
-    await mainPage.vievCart.click();
+    await mainPage.vievCartLink.click();
 
     //Asert
     await expect(cartPage.textLabel).toHaveText(cartPage.shoppingCartText);
@@ -95,7 +96,7 @@ test.describe('Add product to cart', () => {
     await productPage.sideMenu.kids.click();
     await productPage.sideMenu.kidsTopShirts.click();
     await productPage.product15.click();
-    await mainPage.vievCart.click();
+    await mainPage.vievCartLink.click();
 
     //Asert
     await expect(cartPage.countCartProduct).toHaveCount(3);
@@ -119,7 +120,7 @@ test.describe('Add product to cart', () => {
 
     await productPage.sideMenu.biba.click();
     await productPage.product40Biba.click();
-    await mainPage.vievCart.click();
+    await mainPage.vievCartLink.click();
 
     //Asert
     await expect(cartPage.countCartProduct).toHaveCount(4);
@@ -137,7 +138,7 @@ test.describe('Add product to cart', () => {
       await mainPage.continueShopping.click();
     }
 
-    await productPage.topNavigationBar.cart.click();
+    await productPage.topNavigationBar.cartLink.click();
 
     //Asert
     await expect(cartPage.quantityProduct3).toHaveText(`${quantity}`);

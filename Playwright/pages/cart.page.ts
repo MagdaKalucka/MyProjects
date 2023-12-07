@@ -1,7 +1,9 @@
 import { Page } from '@playwright/test';
+import { TopNavigationBar } from '../components/topNavigationBar.components';
 
 export class CartPage {
   constructor(private page: Page) {}
+  topNavigationBar = new TopNavigationBar(this.page)
 
   homeLink = this.page.getByRole('link', { name: 'Home' });
   textLabel = this.page.locator('.active');
@@ -10,9 +12,11 @@ export class CartPage {
   //emptyCart = this.page.getByText('Cart is empty!');
   emptyCart = this.page.locator('.text-center').getByText('Cart is empty!');
   emptyCartText: string = 'Cart is empty!';
-  clickHere = this.page.getByRole('link', { name: 'here' });
+  clickHereLink = this.page.getByRole('link', { name: 'here' });
   quantityProduct3 = this.page.locator('#product-3 .disabled');
   countCartProduct = this.page.locator('.cart_product');
-  buttonProceedToCheckout = this.page.locator('#do_action .btn').getByText('Proceed To Checkout');
+  proceedToCheckoutButton = this.page.locator('#do_action .btn').getByText('Proceed To Checkout');
   checkoutText = 'Checkout';
+  quantityLabel = this.page.locator('.disabled');
+  registerLoginLink = this.page.getByRole('link', { name: 'Register / Login' });
 }

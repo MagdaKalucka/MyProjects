@@ -10,19 +10,18 @@ import { CheckoutPage } from '../pages/checkout.page';
 import { PaymentPage } from '../pages/payment.page';
 
 test.describe('Proceed to checkout', () => {
-  let loginSignUpPage;
+  let loginSignUpPage: LoginSignUpPage;
+  let mainPage: MainPage;
+  let cartPage: CartPage;
+  let signUpPage: SignUpPage;
+  let productPage: ProductPage;
+  let checkoutPage: CheckoutPage;
+  let paymentPage: PaymentPage;
   let email;
-  let mainPage;
-  let cartPage;
-  let signUpPage;
-  let productPage;
-  let checkoutPage;
-  let paymentPage;
   const userId = loginData.userId;
   const password = loginData.userPassword;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
     const emailGenerator = new EmailGenerator();
     email = emailGenerator.generateEmail();
     loginSignUpPage = new LoginSignUpPage(page);
@@ -32,6 +31,8 @@ test.describe('Proceed to checkout', () => {
     productPage = new ProductPage(page);
     checkoutPage = new CheckoutPage(page);
     paymentPage = new PaymentPage(page);
+
+    await page.goto('/');
 
     await loginSignUpPage.singUp(userId, email);
     await signUpPage.singUpSuccefull(
@@ -49,32 +50,32 @@ test.describe('Proceed to checkout', () => {
       signUpPage.zipCode,
       signUpPage.phone,
     );
-    await signUpPage.continue.click();
+    await signUpPage.continueButton.click();
 
     await productPage.product15.click();
-    await mainPage.vievCart.click();
+    await mainPage.vievCartLink.click();
   });
 
   test.afterEach(async () => {
-    await signUpPage.topNavigationBar.deleteAccount.click();
-    await signUpPage.continue.click();
+    await signUpPage.topNavigationBar.deleteAccountLink.click();
+    await signUpPage.continueButton.click();
   });
 
-  test('Proceed to checkout and and check my product', async () => {
+  test('Proceed to checkout and check my product', async () => {
     //Arrange
 
     //Act
-    await cartPage.buttonProceedToCheckout.click();
+    await cartPage.proceedToCheckoutButton.click();
 
     //Asert
     await expect(cartPage.textLabel).toHaveText(cartPage.checkoutText);
   });
 
-  test('Proceed to checkout - Place order (successfull)', async () => {
+  test('Place order (successfull)', async () => {
     //Arrange
 
     //Act
-    await cartPage.buttonProceedToCheckout.click();
+    await cartPage.proceedToCheckoutButton.click();
     await checkoutPage.messageTextarea.fill(checkoutPage.commentToOrder);
     await checkoutPage.placeOrderButton.click();
 
@@ -96,12 +97,12 @@ test.describe('Proceed to checkout', () => {
     await paymentPage.continueButton.click();
   });
 
-  test('Proceed to checkout - Place order (unsuccessfull) - Empty name of card', async () => {
+  test('Place order (unsuccessfull) - Empty name of card', async () => {
     //Arrange
     const nameOfCardEmpty = '';
 
     //Act
-    await cartPage.buttonProceedToCheckout.click();
+    await cartPage.proceedToCheckoutButton.click();
     await checkoutPage.placeOrderButton.click();
 
     await paymentPage.cartData(

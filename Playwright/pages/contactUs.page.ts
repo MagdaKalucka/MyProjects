@@ -5,18 +5,21 @@ export class ContactUs {
   constructor(private page: Page) {}
   topNavigationBar = new TopNavigationBar(this.page);
 
-  contactName = this.page.getByPlaceholder('Name');
-  contactEmail = this.page.getByPlaceholder('Email', { exact: true });
-  contactSubject = this.page.getByPlaceholder('Subject');
-  contactMessage = this.page.getByPlaceholder('Your Message Here');
-  buttonSubmit = this.page.getByRole('button', { name: 'Submit' });
+  contactNameInput = this.page.getByPlaceholder('Name');
+  contactEmailInput = this.page.getByPlaceholder('Email', { exact: true });
+  contactSubjectInput = this.page.getByPlaceholder('Subject');
+  contactSubject: string = 'test';
+  contactMessageInput = this.page.getByPlaceholder('Your Message Here');
+  contactMessage:string = 'this is test message';
+  submitButton = this.page.getByRole('button', { name: 'Submit' });
   alertButton = this.page.on('dialog', async (dialog) => {
     await dialog.accept();
     //.dismiss
   });
-  message = this.page
+  messageLabel = this.page
     .locator('#contact-page')
     .getByText('Success! Your details have');
   messageText = 'Success! Your details have been submitted successfully.';
   home = this.page.getByRole('link', { name: ' Home' });
+
 }

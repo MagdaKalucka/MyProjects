@@ -4,8 +4,8 @@ import { EmailGenerator } from '../test-data/emailGenerator';
 import { LoginSignUpPage } from '../pages/loginSignUp.page';
 
 test.describe('Subscription', () => {
-  let bottomNavigation;
-  let loginSignUp;
+  let bottomNavigation: BottomNavigation;
+  let loginSignUp: LoginSignUpPage;
 
   test.beforeEach(async ({ page }) => {
     bottomNavigation = new BottomNavigation(page);
@@ -20,8 +20,8 @@ test.describe('Subscription', () => {
     const email = emailGenerator.generateEmail();
 
     //Act
-    await bottomNavigation.inputSubscription.fill(email);
-    await bottomNavigation.buttonSend.click();
+    await bottomNavigation.subscriptionInput.fill(email);
+    await bottomNavigation.sendButton.click();
 
     //Asert
     await expect(bottomNavigation.messageSentLabel).toHaveText(bottomNavigation.messageSentText);
@@ -31,12 +31,12 @@ test.describe('Subscription', () => {
     //Arrange
 
     //Act
-    await bottomNavigation.inputSubscription.fill(loginSignUp.uncorrectEmail);
-    await bottomNavigation.buttonSend.click();
+    await bottomNavigation.subscriptionInput.fill(loginSignUp.uncorrectEmail);
+    await bottomNavigation.sendButton.click();
 
     //Assert
 
-    await expect(bottomNavigation.inputSubscription).toHaveJSProperty(
+    await expect(bottomNavigation.subscriptionInput).toHaveJSProperty(
       'validationMessage',
       loginSignUp.typeMismatchMessage,
     );
@@ -46,11 +46,11 @@ test.describe('Subscription', () => {
     //Arrange
 
     //Act
-    await bottomNavigation.buttonSend.click();
+    await bottomNavigation.sendButton.click();
 
     //Assert
 
-    await expect(bottomNavigation.inputSubscription).toHaveJSProperty(
+    await expect(bottomNavigation.subscriptionInput).toHaveJSProperty(
       'validationMessage',
       loginSignUp.valueMissingMessage,
     );

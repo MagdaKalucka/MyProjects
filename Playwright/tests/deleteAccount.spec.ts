@@ -5,8 +5,8 @@ import { LoginSignUpPage } from '../pages/loginSignUp.page';
 import { EmailGenerator } from '../test-data/emailGenerator';
 
 test.describe('Delete account', () => {
-  let loginSignUpPage;
-  let signUpPage;
+  let loginSignUpPage: LoginSignUpPage;
+  let signUpPage: SignUpPage;
   let email;
   const userId = loginData.userId;
 
@@ -40,15 +40,15 @@ test.describe('Delete account', () => {
       signUpPage.phone,
     );
 
-    await signUpPage.continue.click();
-    await signUpPage.topNavigationBar.deleteAccount.click();
-    await signUpPage.continue.click();
-    await signUpPage.topNavigationBar.buttonSignupLogin.click();
+    await signUpPage.continueButton.click();
+    await signUpPage.topNavigationBar.deleteAccountLink.click();
+    await signUpPage.continueButton.click();
+    await signUpPage.topNavigationBar.signupLoginLink.click();
     await loginSignUpPage.login(email, password);
 
     // Assert
     await expect(loginSignUpPage.errorMessage).toHaveText(
-      loginSignUpPage.message,
+      loginSignUpPage.errorMessageText,
     );
   });
 });

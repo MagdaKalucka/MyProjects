@@ -2,7 +2,7 @@ import { Page } from '@playwright/test';
 import { TopNavigationBar } from '../components/topNavigationBar.components';
 
 export class SignUpPage {
-  constructor(private page: Page) { }
+  constructor(private page: Page) {}
 
   topNavigationBar = new TopNavigationBar(this.page);
 
@@ -21,11 +21,15 @@ export class SignUpPage {
   cityInput = this.page.locator('#city');
   zipCodeInput = this.page.locator('#zipcode');
   mobileNumerInput = this.page.locator('#mobile_number');
-  buttonCreateAccount = this.page.getByRole('button', { name: 'Create Account'});
-  continue = this.page.getByRole('link', { name: 'Continue' });
-  textAccountCreated = this.page.getByText('Account Created!');
-  textCongratulation = this.page.getByText('Congratulations! Your new');
-  textYouCanNow = this.page.getByText('You can now take advantage of');
+  createAccountButton = this.page.getByRole('button', { name: 'Create Account',});
+  continueButton = this.page.getByRole('link', { name: 'Continue' });
+  accountCreatedTextLabel = this.page.getByText('Account Created!');
+  accountCreatedText: string = 'Account Created!';
+  congratulationTextLabel = this.page.getByText('Congratulations! Your new');
+  congratulationText: string = 'Congratulations! Your new account has been successfully created!';
+  youCanNowTextLabel = this.page.getByText('You can now take advantage of');
+  youCanNowText: string =
+    'You can now take advantage of member privileges to enhance your online shopping experience with us.';
   day = '3';
   month = 'April';
   years = '1990';
@@ -68,6 +72,6 @@ export class SignUpPage {
     await this.cityInput.fill(city);
     await this.zipCodeInput.fill(zipCode);
     await this.mobileNumerInput.fill(phone);
-    await this.buttonCreateAccount.click();
+    await this.createAccountButton.click();
   }
 }

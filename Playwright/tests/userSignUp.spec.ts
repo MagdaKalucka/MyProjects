@@ -5,17 +5,18 @@ import { LoginSignUpPage } from '../pages/loginSignUp.page';
 import { EmailGenerator } from '../test-data/emailGenerator';
 
 test.describe('User sign up page', () => {
-  let loginSignUpPage;
-  let signUpPage;
+  let loginSignUpPage: LoginSignUpPage;
+  let signUpPage: SignUpPage;
   let email;
   const userId = loginData.userId;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
     const emailGenerator = new EmailGenerator();
     email = emailGenerator.generateEmail();
     loginSignUpPage = new LoginSignUpPage(page);
     signUpPage = new SignUpPage(page);
+    
+    await page.goto('/');
   });
 
   test('Sign up (successful)', async () => {
@@ -41,19 +42,15 @@ test.describe('User sign up page', () => {
     );
 
     // Assert
-    await expect(signUpPage.textAccountCreated).toHaveText('Account Created!');
-    await expect(signUpPage.textCongratulation).toHaveText(
-      'Congratulations! Your new account has been successfully created!',
-    );
-    await expect(signUpPage.textYouCanNow).toHaveText(
-      'You can now take advantage of member privileges to enhance your online shopping experience with us.',
-    );
+    await expect(signUpPage.accountCreatedTextLabel).toHaveText(signUpPage.accountCreatedText);
+    await expect(signUpPage.congratulationTextLabel).toHaveText(signUpPage.congratulationText);
+    await expect(signUpPage.youCanNowTextLabel).toHaveText(signUpPage.youCanNowText);
 
     // clean up after test
-    await signUpPage.continue.click();
-    await signUpPage.topNavigationBar.deleteAccount.click();
-    await signUpPage.continue.click();
-    await signUpPage.topNavigationBar.buttonSignupLogin.click();
+    await signUpPage.continueButton.click();
+    await signUpPage.topNavigationBar.deleteAccountLink.click();
+    await signUpPage.continueButton.click();
+    await signUpPage.topNavigationBar.signupLoginLink.click();
     await loginSignUpPage.login(email, password);
   });
 
@@ -64,7 +61,6 @@ test.describe('User sign up page', () => {
     await loginSignUpPage.singUp(userId, loginSignUpPage.uncorrectEmail);
 
     //Assert
-
     await expect(loginSignUpPage.emailAddressInput).toHaveJSProperty(
       'validationMessage',
       loginSignUpPage.typeMismatchMessage,
@@ -95,7 +91,6 @@ test.describe('User sign up page', () => {
     //Assert
     await expect(loginSignUpPage.signupButton).toContainText('Signup');
     await expect(loginSignUpPage.signupButton).toBeEnabled();
-
     await expect(loginSignUpPage.passwordInput).toHaveJSProperty(
       'validationMessage',
       loginSignUpPage.valueMissingMessage,
@@ -105,7 +100,6 @@ test.describe('User sign up page', () => {
   test('Sign up (unsuccessful) - User exists', async () => {
     //Arrange
     const password = loginData.userPassword;
-    const messageUserExist = 'Email Address already exist!';
 
     // Act
     await loginSignUpPage.singUp(userId, email);
@@ -124,14 +118,13 @@ test.describe('User sign up page', () => {
       signUpPage.zipCode,
       signUpPage.phone,
     );
-
-    await signUpPage.continue.click();
-    await signUpPage.topNavigationBar.logout.click();
+    await signUpPage.continueButton.click();
+    await signUpPage.topNavigationBar.logoutLink.click();
     await loginSignUpPage.singUp(userId, email);
 
     //Assert
-    await expect(loginSignUpPage.errorMessageExist).toHaveText(
-      messageUserExist,
+    await expect(loginSignUpPage.messageUserExist).toHaveText(
+      loginSignUpPage.messageUserExistText,
     );
   });
 

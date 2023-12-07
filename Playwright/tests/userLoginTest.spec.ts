@@ -5,25 +5,23 @@ import { LoginSignUpPage } from '../pages/loginSignUp.page';
 import { EmailGenerator } from '../test-data/emailGenerator';
 
 test.describe('User Login page', () => {
-  let loginSignUpPage;
-  let signUpPage;
+  let loginSignUpPage: LoginSignUpPage;
+  let signUpPage: SignUpPage;
   let email;
   const userId = loginData.userId;
   const password = loginData.userPassword;
 
   test.beforeEach(async ({ page }) => {
-    
     const emailGenerator = new EmailGenerator();
     email = emailGenerator.generateEmail();
     loginSignUpPage = new LoginSignUpPage(page);
     signUpPage = new SignUpPage(page);
-    await page.goto('/');
-    await loginSignUpPage.topNavigationBar.buttonSignupLogin.click();
 
+    await page.goto('/');
+    await loginSignUpPage.topNavigationBar.signupLoginLink.click();
   });
 
   test('Sign in (successful)', async () => {
-
     //Arrange
     await loginSignUpPage.singUp(userId, email);
     await signUpPage.singUpSuccefull(
@@ -41,8 +39,8 @@ test.describe('User Login page', () => {
       signUpPage.zipCode,
       signUpPage.phone,
     );
-    await signUpPage.continue.click();
-    await loginSignUpPage.topNavigationBar.logout.click();
+    await signUpPage.continueButton.click();
+    await loginSignUpPage.topNavigationBar.logoutLink.click();
 
     const messageLoggedInUs = `Logged in as ${userId}`;
 
@@ -50,13 +48,13 @@ test.describe('User Login page', () => {
     await loginSignUpPage.login(email, password);
 
     //Assert
-    await expect(loginSignUpPage.topNavigationBar.loggedInUs).toContainText(
+    await expect(loginSignUpPage.topNavigationBar.loggedInUsLink).toContainText(
       messageLoggedInUs,
     );
 
     // clean up after test
-    await signUpPage.topNavigationBar.deleteAccount.click();
-    await signUpPage.continue.click();
+    await signUpPage.topNavigationBar.deleteAccountLink.click();
+    await signUpPage.continueButton.click();
   });
   
   test('Sign in (unsuccessful) - Uncorrect email', async () => {
@@ -68,8 +66,7 @@ test.describe('User Login page', () => {
 
     //Assert
     await expect(loginSignUpPage.errorMessage).toHaveText(
-      loginSignUpPage.message,
-    );
+      loginSignUpPage.errorMessageText);
   });
 
   test('Sign in (unsuccessful) - Empty password', async () => {
@@ -88,14 +85,14 @@ test.describe('User Login page', () => {
 
   test('Sign in (unsuccessful) - Uncorrect password', async () => {
     //Arrange
-    const uncorrectpassword = 'user';
+    const uncorrectPassword = 'user';
 
     //Act
-    await loginSignUpPage.login(email, uncorrectpassword);
+    await loginSignUpPage.login(email, uncorrectPassword);
 
     //Assert
     await expect(loginSignUpPage.errorMessage).toHaveText(
-      loginSignUpPage.message,
+      loginSignUpPage.errorMessageText,
     );
   });
 });
