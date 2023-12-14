@@ -83,9 +83,9 @@ describe('Proceed to checkout', () => {
     );
 
     //Asert
-
+const text = 'cos tam'
     paymentPage.nameOfCardInput.invoke('prop', 'validationMessage')
-    .should('equal', loginSignUpPage.missingMessageBrowser);
+    .should('equal', loginSignUpPage.valueMissingMessage);
    
   });
 /* I should write more tests about empty field but each tests will be this same it will only different name of field. */

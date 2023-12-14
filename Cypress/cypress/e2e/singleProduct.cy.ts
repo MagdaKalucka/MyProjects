@@ -16,7 +16,7 @@ describe('Product page', () => {
   
   beforeEach(function () {
     email = `userExamples123+${Date.now()}@gmail.com`;
-    cy.visit('/')
+    cy.page();
 
   });
 
