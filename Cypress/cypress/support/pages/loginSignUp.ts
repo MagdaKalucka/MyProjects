@@ -3,22 +3,11 @@ import BottomNavigation from "../components/bottomNavigation";
 
 class LoginSignUpPage {
 
-bottomNavigation = new BottomNavigation;
-topNavigationBar = new TopNavigationBar;
-
-  get nameInput () {return cy.get('[placeholder="Name"]')};
-  get emailAddressInput () {return cy.get(".signup-form input[name='email']")};
-  get signupButton () {return cy.dataCy('signup-button')};
-
-  get emailLoginInput () {return cy.dataCy('login-email')};
-  get passwordInput () {return cy.dataCy('login-password')};
-  get loginButton () {return cy.dataCy('login-button')};
-  get errorMessage () {return cy.contains('Your email or password is')};
-  get messageUserExist () {return cy.contains('Email Address already exist!')};
+  bottomNavigation = new BottomNavigation;
+  topNavigationBar = new TopNavigationBar;
 
   messageUserExistText: string = 'Email Address already exist!';
   errorMessageText: string = 'Your email or password is incorrect!';
- 
   
   missingMessageBrowser: string = process.env.BROWSER === 'default' ? 'Wypełnij to pole.' : 'Please fill out this field.';
   //valueMissingMessage: string = this.missingMessageBrowser;
@@ -29,6 +18,15 @@ topNavigationBar = new TopNavigationBar;
   
   valueMissingMessage = 'Wypełnij to pole.';
   typeMismatchMessage = `Uwzględnij znak „@” w adresie e-mail. W adresie „${this.uncorrectEmail}” brakuje znaku „@”.`
+
+  get nameInput () {return cy.get('[placeholder="Name"]')};
+  get emailAddressInput () {return cy.get(".signup-form input[name='email']")};
+  get signupButton () {return cy.dataCy('signup-button')};
+  get emailLoginInput () {return cy.dataCy('login-email')};
+  get passwordInput () {return cy.dataCy('login-password')};
+  get loginButton () {return cy.dataCy('login-button')};
+  get errorMessage () {return cy.contains('Your email or password is')};
+  get messageUserExist () {return cy.contains('Email Address already exist!')};
   
   singUp(userId: string, email: string) {
     this.topNavigationBar.signupLoginLink.click();

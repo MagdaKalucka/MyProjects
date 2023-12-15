@@ -28,7 +28,7 @@ describe("Delete product from the cart", () => {
     cartPage.deleteProduct.click();
 
     //Assert
-    cartPage.emptyCart.then(text => {
+    cartPage.emptyCart.then((text) => {
       expect(text).to.have.text(cartPage.emptyCartText);
     });
   });
@@ -43,12 +43,12 @@ describe("Delete product from the cart", () => {
     cartPage.clickHereLink.click();
 
     //Assert
-    cy.location().then(url => {
-      expect(url.href).to.eq('https://www.automationexercise.com/products') 
-});
+    cy.location().then((url) => {
+      expect(url.href).to.eq("https://www.automationexercise.com/products");
+    });
   });
 
- it("Delete 10 the same products", () => {
+  it("Delete 10 the same products", () => {
     //Arrange
     const quantity: number = 10;
     productPage.sideMenu.women.click();
@@ -63,8 +63,8 @@ describe("Delete product from the cart", () => {
     //Act
     cartPage.deleteProduct.click();
 
-    //Asert
-    cartPage.emptyCart.should('have.text',cartPage.emptyCartText);
+    //Assert
+    cartPage.emptyCart.should("have.text", cartPage.emptyCartText);
   });
 
   it("Delete 3 products", () => {
@@ -91,12 +91,9 @@ describe("Delete product from the cart", () => {
       cartPage.deleteProduct.eq(number).click();
       number--;
     }
-    // await cartPage.deleteProduct.eq(2).click();
-    // await cartPage.deleteProduct.eq(1).click();
-    // await cartPage.deleteProduct.eq(0).click();
     cartPage.emptyCart.click();
 
-    //Asert
-    cartPage.emptyCart.should('have.text', cartPage.emptyCartText);
+    //Assert
+    cartPage.emptyCart.should("have.text", cartPage.emptyCartText);
   });
 });

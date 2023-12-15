@@ -10,7 +10,7 @@ describe("Delete account", () => {
   beforeEach(function () {
     cy.page();
   });
-  
+
   it("Delete account (succesfull)", async () => {
     // Arrange
     let email = `userExamples123+${Date.now()}@gmail.com`;
@@ -43,7 +43,9 @@ describe("Delete account", () => {
     loginSignUpPage.login(email, password);
 
     // Assert
-    loginSignUpPage.errorMessage.should('have.text',
-      loginSignUpPage.errorMessageText);
+    loginSignUpPage.errorMessage.should(
+      "have.text",
+      loginSignUpPage.errorMessageText
+    );
   });
 });

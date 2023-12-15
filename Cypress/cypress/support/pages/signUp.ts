@@ -6,6 +6,11 @@ class SignUpPage {
   topNavigationBar = new TopNavigationBar;
   loginSignUpPage = new LoginSignUpPage;
 
+  accountCreatedText: string = 'Account Created!';
+  congratulationText: string = 'Congratulations! Your new account has been successfully created!';
+  youCanNowText: string =
+    'You can now take advantage of member privileges to enhance your online shopping experience with us.';
+
   get idGender1Input () {return cy.get('#id_gender1')};
   get idGender2Input () {return cy.get('#id_gender2')};
   get passwordSignUpInput () {return cy.get('#password')};
@@ -24,12 +29,9 @@ class SignUpPage {
   get createAccountButton () {return cy.dataCy('create-account')};
   get continueButton () {return cy.dataCy('continue-button')};
   get accountCreatedTextLabel () {return cy.contains('Account Created!')};
-  accountCreatedText: string = 'Account Created!';
   get congratulationTextLabel () {return cy.contains('Congratulations! Your new')};
-  congratulationText: string = 'Congratulations! Your new account has been successfully created!';
   get youCanNowTextLabel () {return cy.contains('You can now take advantage of')};
-  youCanNowText: string =
-    'You can now take advantage of member privileges to enhance your online shopping experience with us.';
+ 
   day = '3';
   month = 'April';
   years = '1990';

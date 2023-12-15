@@ -86,6 +86,5 @@ describe('User Login page', () => {
    
     loginSignUpPage.errorMessage.should('have.text', loginSignUpPage.errorMessageText);
     });
-
   });
 

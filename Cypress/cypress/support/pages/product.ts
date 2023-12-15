@@ -5,13 +5,13 @@ class ProductPage {
   sideMenu = new SideMenu;
   topNavigationBar = new TopNavigationBar;
   
-  get searchInput () {return cy.get('.container #search_product')};
-  get searchButton () {return cy.get('.container #submit_search')};
   productNameText: string = 'frozen';
   badProductNameText: string = 'yellow';
-
-  get productTextLabel () {return cy.contains('Frozen Tops For Kids')};
   productText: string = 'Frozen Tops For Kids';
+
+  get searchInput () {return cy.get('.container #search_product')};
+  get searchButton () {return cy.get('.container #submit_search')};
+  get productTextLabel () {return cy.contains('Frozen Tops For Kids')};
   get viewProduct1 () {return cy.get('.choose > .nav > li > a').first()};
 
   selectorProduct(productNumber: number): string {

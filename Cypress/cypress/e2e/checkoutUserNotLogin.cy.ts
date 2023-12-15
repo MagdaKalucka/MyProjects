@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
-import CheckoutPage from '../support/pages/checkout';
-import PaymentPage from '../support/pages/payment';
+import CheckoutPage from "../support/pages/checkout";
+import PaymentPage from "../support/pages/payment";
 import LoginData from "../support/loginData";
 import SignUpPage from "../support/pages/signUp";
 import LoginSignUpPage from "../support/pages/loginSignUp";
@@ -19,9 +19,7 @@ const userId = LoginData.userId;
 const password = LoginData.userPassword;
 let email = `userExamples123+${Date.now()}@gmail.com`;
 
-describe('Checkout user not login', () => {
- 
-
+describe("Checkout user not login", () => {
   beforeEach(function () {
     cy.page();
   });
@@ -31,7 +29,7 @@ describe('Checkout user not login', () => {
     signUpPage.continueButton.click();
   });
 
-  it('Proceed to checkout and register user', () => {
+  it("Proceed to checkout and register user", () => {
     //Arrange
 
     //Act
@@ -54,18 +52,23 @@ describe('Checkout user not login', () => {
       signUpPage.state,
       signUpPage.city,
       signUpPage.zipCode,
-      signUpPage.phone,
+      signUpPage.phone
     );
 
     //Assert
-    
-    signUpPage.accountCreatedTextLabel.should('have.text', signUpPage.accountCreatedText);
-    signUpPage.congratulationTextLabel.should('have.text', signUpPage.congratulationText
+
+    signUpPage.accountCreatedTextLabel.should(
+      "have.text",
+      signUpPage.accountCreatedText
+    );
+    signUpPage.congratulationTextLabel.should(
+      "have.text",
+      signUpPage.congratulationText
     );
     signUpPage.continueButton.click();
   });
 
-  it('Add to cart then register user and buy', () => {
+  it("Add to cart then register user and buy", () => {
     //Arrange
 
     //Act
@@ -85,11 +88,13 @@ describe('Checkout user not login', () => {
       paymentPage.cartNumber,
       paymentPage.cvc,
       paymentPage.expiration,
-      paymentPage.expiryYear,
+      paymentPage.expiryYear
     );
 
-    //Asert
-    paymentPage.messageCongratulationsLabel.should('have.text',
-      paymentPage.messageCongratulationsText,);
+    //Assert
+    paymentPage.messageCongratulationsLabel.should(
+      "have.text",
+      paymentPage.messageCongratulationsText
+    );
   });
 });

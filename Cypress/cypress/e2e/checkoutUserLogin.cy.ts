@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
-import CheckoutPage from '../support/pages/checkout';
-import PaymentPage from '../support/pages/payment';
+import CheckoutPage from "../support/pages/checkout";
+import PaymentPage from "../support/pages/payment";
 import SignUpPage from "../support/pages/signUp";
 import LoginSignUpPage from "../support/pages/loginSignUp";
 import MainPage from "../support/pages/main";
@@ -15,10 +15,8 @@ const productPage = new ProductPage();
 const checkoutPage = new CheckoutPage();
 const paymentPage = new PaymentPage();
 
-describe('Proceed to checkout', () => {
- 
+describe("Proceed to checkout", () => {
   beforeEach(function () {
-   
     cy.page();
 
     signUpPage.fullSignUp();
@@ -31,17 +29,17 @@ describe('Proceed to checkout', () => {
     signUpPage.deleteAccount();
   });
 
-  it('Proceed to checkout and check my product', () => {
+  it("Proceed to checkout and check my product", () => {
     //Arrange
 
     //Act
     cartPage.proceedToCheckoutButton.click();
 
-    //Asert
-    cartPage.textLabel.should('have.text', cartPage.checkoutText);
+    //Assert
+    cartPage.textLabel.should("have.text", cartPage.checkoutText);
   });
 
-  it('Place order (successfull)', () => {
+  it("Place order (successfull)", () => {
     //Arrange
 
     //Act
@@ -54,21 +52,22 @@ describe('Proceed to checkout', () => {
       paymentPage.cartNumber,
       paymentPage.cvc,
       paymentPage.expiration,
-      paymentPage.expiryYear,
+      paymentPage.expiryYear
     );
 
-    //Asert
-    paymentPage.messageCongratulationsLabel.should('have.text', 
-    paymentPage.messageCongratulationsText
+    //Assert
+    paymentPage.messageCongratulationsLabel.should(
+      "have.text",
+      paymentPage.messageCongratulationsText
     );
 
     //Back to main page
     paymentPage.continueButton.click();
   });
 
-  it('Place order (unsuccessfull) - Empty name of card', () => {
+  it("Place order (unsuccessfull) - Empty name of card", () => {
     //Arrange
-    const nameOfCardEmpty = '{ESC}';
+    const nameOfCardEmpty = "{ESC}";
 
     //Act
     cartPage.proceedToCheckoutButton.click();
@@ -79,14 +78,14 @@ describe('Proceed to checkout', () => {
       paymentPage.cartNumber,
       paymentPage.cvc,
       paymentPage.expiration,
-      paymentPage.expiryYear,
+      paymentPage.expiryYear
     );
 
-    //Asert
-const text = 'cos tam'
-    paymentPage.nameOfCardInput.invoke('prop', 'validationMessage')
-    .should('equal', loginSignUpPage.valueMissingMessage);
-   
+    //Assert
+
+    paymentPage.nameOfCardInput
+      .invoke("prop", "validationMessage")
+      .should("equal", loginSignUpPage.valueMissingMessage);
   });
-/* I should write more tests about empty field but each tests will be this same it will only different name of field. */
+  /* I should write more tests about empty field but each tests will be this same it will only different name of field. */
 });

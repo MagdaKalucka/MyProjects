@@ -17,8 +17,7 @@ describe("Search product in product page", () => {
     productPage.searchButton.click();
 
     //Assert
-    productPage.productTextLabel.should('have.text', productPage.productText);
-  
+    productPage.productTextLabel.should("have.text", productPage.productText);
   });
 
   it("Search product (unsuccessful)", () => {

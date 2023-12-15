@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
-import LoginData from '../support/loginData';
-import SignUpPage from '../support/pages/signUp';
-import LoginSignUpPage from '../support/pages/loginSignUp';
+import LoginData from "../support/loginData";
+import SignUpPage from "../support/pages/signUp";
+import LoginSignUpPage from "../support/pages/loginSignUp";
 
 const signUpPage = new SignUpPage();
 const loginSignUpPage = new LoginSignUpPage();
@@ -9,16 +9,13 @@ const userId = LoginData.userId;
 const password = LoginData.userPassword;
 let email;
 
-describe('User sign up page', () => {
-  
+describe("User sign up page", () => {
   beforeEach(function () {
-
     email = `userExamples123+${Date.now()}@gmail.com`;
     cy.page();
-
   });
 
-  it('Sign up (successful)', () => {
+  it("Sign up (successful)", () => {
     // Arrange
 
     // Act
@@ -36,16 +33,21 @@ describe('User sign up page', () => {
       signUpPage.state,
       signUpPage.city,
       signUpPage.zipCode,
-      signUpPage.phone,
+      signUpPage.phone
     );
 
     // Assert
-    signUpPage.accountCreatedTextLabel.should('have.text', signUpPage.accountCreatedText);
-    signUpPage.congratulationTextLabel.should('have.text', signUpPage.congratulationText);
-    signUpPage.youCanNowTextLabel.should('have.text', signUpPage.youCanNowText);
+    signUpPage.accountCreatedTextLabel.should(
+      "have.text",
+      signUpPage.accountCreatedText
+    );
+    signUpPage.congratulationTextLabel.should(
+      "have.text",
+      signUpPage.congratulationText
+    );
+    signUpPage.youCanNowTextLabel.should("have.text", signUpPage.youCanNowText);
 
     // clean up after test
-
     signUpPage.continueButton.click();
     signUpPage.topNavigationBar.deleteAccountLink.click();
     signUpPage.continueButton.click();
@@ -53,49 +55,47 @@ describe('User sign up page', () => {
     loginSignUpPage.login(email, password);
   });
 
-  it('Sign up (unsuccessful) - Uncorrect email', () => {
+  it("Sign up (unsuccessful) - Uncorrect email", () => {
     // Arrange
 
     //Act
     loginSignUpPage.singUp(userId, loginSignUpPage.uncorrectEmail);
 
     //Assert
-    loginSignUpPage.emailAddressInput.invoke('prop', 'validationMessage')
-    .should('equal', loginSignUpPage.typeMismatchMessage);
-   
+    loginSignUpPage.emailAddressInput
+      .invoke("prop", "validationMessage")
+      .should("equal", loginSignUpPage.typeMismatchMessage);
   });
 
- it('Sign up (unsuccessful) - Empty email', () => {
-
+  it("Sign up (unsuccessful) - Empty email", () => {
     // Arrange
-    const emptyEmail = '{ESC}';
+    const emptyEmail = "{ESC}";
 
     //Act
     loginSignUpPage.singUp(userId, emptyEmail);
 
     //Assert
-    loginSignUpPage.emailAddressInput.invoke('prop', 'validationMessage')
-    .should('equal', loginSignUpPage.valueMissingMessage);
- 
+    loginSignUpPage.emailAddressInput
+      .invoke("prop", "validationMessage")
+      .should("equal", loginSignUpPage.valueMissingMessage);
   });
 
-  it('Sign up (unsuccessful) - Empty user', () => {
+  it("Sign up (unsuccessful) - Empty user", () => {
     // Arrange
-    const emptyUserId = '{ESC}';
+    const emptyUserId = "{ESC}";
 
     //Act
     loginSignUpPage.singUp(emptyUserId, email);
 
     //Assert
-    loginSignUpPage.signupButton.should('contain.text','Signup');
-    loginSignUpPage.signupButton.should('be.enabled');
-
-    loginSignUpPage.passwordInput.invoke('prop', 'validationMessage')
-    .should('equal', loginSignUpPage.valueMissingMessage)
- 
+    loginSignUpPage.signupButton.should("contain.text", "Signup");
+    loginSignUpPage.signupButton.should("be.enabled");
+    loginSignUpPage.passwordInput
+      .invoke("prop", "validationMessage")
+      .should("equal", loginSignUpPage.valueMissingMessage);
   });
 
-  it('Sign up (unsuccessful) - User exists', () => {
+  it("Sign up (unsuccessful) - User exists", () => {
     //Arrange
 
     // Act
@@ -113,24 +113,23 @@ describe('User sign up page', () => {
       signUpPage.state,
       signUpPage.city,
       signUpPage.zipCode,
-      signUpPage.phone,
+      signUpPage.phone
     );
     signUpPage.continueButton.click();
-    
+
     signUpPage.topNavigationBar.logoutLink.click();
     loginSignUpPage.singUp(userId, email);
 
     //Assert
-    loginSignUpPage.messageUserExist.should('have.text',
-      loginSignUpPage.messageUserExistText,
+    loginSignUpPage.messageUserExist.should(
+      "have.text",
+      loginSignUpPage.messageUserExistText
     );
-
-    
   });
 
-  it('Sign up (unsuccessful) - Empty first name', () => {
+  it("Sign up (unsuccessful) - Empty first name", () => {
     //Arrange
-    const emptyFirstName = '{ESC}';
+    const emptyFirstName = "{ESC}";
 
     // Act
     loginSignUpPage.singUp(userId, email);
@@ -147,14 +146,13 @@ describe('User sign up page', () => {
       signUpPage.state,
       signUpPage.city,
       signUpPage.zipCode,
-      signUpPage.phone,
+      signUpPage.phone
     );
 
     //Assert
-    signUpPage.firstNameInput.invoke('prop', 'validationMessage')
-    .should('equal', loginSignUpPage.valueMissingMessage)
-
+    signUpPage.firstNameInput
+      .invoke("prop", "validationMessage")
+      .should("equal", loginSignUpPage.valueMissingMessage);
   });
-
   /* I should write more tests about empty field but each tests will be this same it will only different name of field. */
 });

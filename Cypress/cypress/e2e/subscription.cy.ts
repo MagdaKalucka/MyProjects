@@ -18,7 +18,7 @@ describe("Subscription", () => {
     bottomNavigation.subscriptionInput.type(email);
     bottomNavigation.sendButton.click();
 
-    //Asert
+    //Assert
     bottomNavigation.messageSentLabel.then((text) => {
       expect(text).to.have.text(bottomNavigation.messageSentText);
     });
@@ -32,8 +32,9 @@ describe("Subscription", () => {
     bottomNavigation.sendButton.click();
 
     //Assert
-    bottomNavigation.subscriptionInput.invoke('prop', 'validationMessage')
-    .should('equal', loginSignUp.typeMismatchMessage)
+    bottomNavigation.subscriptionInput
+      .invoke("prop", "validationMessage")
+      .should("equal", loginSignUp.typeMismatchMessage);
   });
 
   it("Send subscription (unsuccessful) - Empty input", () => {
@@ -43,7 +44,8 @@ describe("Subscription", () => {
     bottomNavigation.sendButton.click();
 
     //Assert
-    bottomNavigation.subscriptionInput.invoke('prop', 'validationMessage')
-    .should('equal', loginSignUp.valueMissingMessage)
+    bottomNavigation.subscriptionInput
+      .invoke("prop", "validationMessage")
+      .should("equal", loginSignUp.valueMissingMessage);
   });
 });

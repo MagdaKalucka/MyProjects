@@ -25,7 +25,7 @@ describe("Add product to cart", () => {
     //Act
     productPage.product1.click();
 
-    //Asert
+    //Assert
     mainPage.messageAddLabel.should("have.text", mainPage.messageAddText);
 
     mainPage.buttonContinueShopping();
@@ -40,7 +40,7 @@ describe("Add product to cart", () => {
     productPage.product15.click();
     mainPage.vievCartLink.click();
 
-    //Asert
+    //Assert
     cartPage.textLabel.should("have.text", cartPage.shoppingCartText);
   });
 
@@ -61,7 +61,7 @@ describe("Add product to cart", () => {
     productPage.product15.click();
     mainPage.vievCartLink.click();
 
-    //Asert
+    //Assert
     cartPage.countCartProduct.should('have.length', 3);
   });
 

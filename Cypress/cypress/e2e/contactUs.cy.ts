@@ -25,8 +25,8 @@ describe("Contact us page", () => {
     contactUs.submitButton.click();
     contactUs.alertButton;
 
-    //Asert
-  contactUs.messageLabel.should('have.text', contactUs.messageText);
+    //Assert
+    contactUs.messageLabel.should("have.text", contactUs.messageText);
   });
 
   it("Send message (unsuccessful) - Empty form", () => {
@@ -36,13 +36,13 @@ describe("Contact us page", () => {
     contactUs.submitButton.click();
 
     //Assert
-    contactUs.contactEmailInput.invoke('prop', 'validationMessage')
-    .should('equal', loginSignUp.valueMissingMessage)
-
+    contactUs.contactEmailInput
+      .invoke("prop", "validationMessage")
+      .should("equal", loginSignUp.valueMissingMessage);
   });
 
   it("Send message (unsuccessful) - Form without email", () => {
-    //ge
+    //Arrange
 
     //Act
     contactUs.contactNameInput.type(userId);
@@ -51,15 +51,9 @@ describe("Contact us page", () => {
     contactUs.submitButton.click();
 
     //Assert
-
-    // await expect(contactUs.contactEmail).toHaveJSProperty(
-    //   'validationMessage',
-    //   loginSignUp.valueMissingMessage,
-    // );
-
-    contactUs.contactEmailInput.invoke('prop', 'validationMessage')
-    .should('equal', loginSignUp.valueMissingMessage)
-  
+    contactUs.contactEmailInput
+      .invoke("prop", "validationMessage")
+      .should("equal", loginSignUp.valueMissingMessage);
   });
 
   it("Send message (successful) - Form only with email", () => {
@@ -70,7 +64,7 @@ describe("Contact us page", () => {
     contactUs.submitButton.click();
     contactUs.alertButton;
 
-    //Asert
-    contactUs.messageLabel.should('have.text', contactUs.messageText);
+    //Assert
+    contactUs.messageLabel.should("have.text", contactUs.messageText);
   });
 });
