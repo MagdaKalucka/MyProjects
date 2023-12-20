@@ -80,7 +80,7 @@ describe("User sign up page", () => {
       .should("equal", loginSignUpPage.valueMissingMessage);
   });
 
-  it("Sign up (unsuccessful) - Empty user", () => {
+  it.only("Sign up (unsuccessful) - Empty user", () => {
     // Arrange
     const emptyUserId = "{ESC}";
 
@@ -88,8 +88,9 @@ describe("User sign up page", () => {
     loginSignUpPage.singUp(emptyUserId, email);
 
     //Assert
-    loginSignUpPage.signupButton.should("contain.text", "Signup");
-    loginSignUpPage.signupButton.should("be.enabled");
+    loginSignUpPage.signupButton.should('contain.text', 'Signup');
+    loginSignUpPage.signupButton.should('be.enabled');
+    loginSignUpPage.passwordInput.should('have.length', 1)
     loginSignUpPage.passwordInput
       .invoke("prop", "validationMessage")
       .should("equal", loginSignUpPage.valueMissingMessage);

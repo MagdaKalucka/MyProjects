@@ -43,9 +43,7 @@ describe("Delete product from the cart", () => {
     cartPage.clickHereLink.click();
 
     //Assert
-    cy.location().then((url) => {
-      expect(url.href).to.eq("https://www.automationexercise.com/products");
-    });
+    cy.url().should('eq', 'https://www.automationexercise.com/products')
   });
 
   it("Delete 10 the same products", () => {
