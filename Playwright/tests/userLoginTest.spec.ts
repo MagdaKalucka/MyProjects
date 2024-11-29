@@ -3,10 +3,12 @@ import { loginData } from '../test-data/login.data';
 import { SignUpPage } from '../pages/signUp.page';
 import { LoginSignUpPage } from '../pages/loginSignUp.page';
 import { EmailGenerator } from '../test-data/emailGenerator';
+import { MainPage } from '../pages/main.page';
 
 test.describe('User Login page', () => {
   let loginSignUpPage: LoginSignUpPage;
   let signUpPage: SignUpPage;
+  let mainPage: MainPage;
   let email;
   const userId = loginData.userId;
   const password = loginData.userPassword;
@@ -16,8 +18,10 @@ test.describe('User Login page', () => {
     email = emailGenerator.generateEmail();
     loginSignUpPage = new LoginSignUpPage(page);
     signUpPage = new SignUpPage(page);
+    mainPage = new MainPage(page);
 
     await page.goto('/');
+    await mainPage.popupButton.click();
     await loginSignUpPage.topNavigationBar.signupLoginLink.click();
   });
 

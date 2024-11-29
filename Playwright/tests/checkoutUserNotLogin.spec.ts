@@ -33,6 +33,7 @@ test.describe('Checkout user not login', () => {
     paymentPage = new PaymentPage(page);
 
     await page.goto('/');
+    await mainPage.popupButton.click();
   });
 
   test.afterEach(async () => {

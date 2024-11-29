@@ -5,7 +5,8 @@ export class SideMenu {
 
   women = this.page.getByRole('link', { name: ' Women' });
   womenMain = this.page.getByRole('heading', { name: ' Women' });
-  womenDress = this.page.getByRole('link', { name: 'Dress' });
+  //womenDress = this.page.getByRole('link', { name: 'Dress' });
+  womenDress = this.page.locator("a[href='/category_products/1']");
   womenTops = this.page.getByRole('link', { name: 'Tops' });
   womenSaree = this.page.getByRole('link', { name: 'Saree' });
 

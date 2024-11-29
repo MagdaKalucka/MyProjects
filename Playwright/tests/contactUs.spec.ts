@@ -3,20 +3,24 @@ import { loginData } from '../test-data/login.data';
 import { ContactUs } from '../pages/contactUs.page';
 import { EmailGenerator } from '../test-data/emailGenerator';
 import { LoginSignUpPage } from '../pages/loginSignUp.page';
+import { MainPage } from '../pages/main.page';
 
 test.describe('Contact us page', () => {
   let contactUs: ContactUs;
   let loginSignUp: LoginSignUpPage;
+  let mainPage: MainPage;
   let email;
   const userId = loginData.userId;
 
   test.beforeEach(async ({ page }) => {
     contactUs = new ContactUs(page);
     loginSignUp = new LoginSignUpPage(page);
+    mainPage = new MainPage(page);
     const emailGenerator = new EmailGenerator();
     email = emailGenerator.generateEmail();
 
     await page.goto('/');
+    await mainPage.popupButton.click();
     await contactUs.topNavigationBar.contactUsLink.click();
   });
 

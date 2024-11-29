@@ -9,4 +9,5 @@ export class MainPage {
   messageAddLabel = this.page.locator('.modal-body .text-center:first-child');
   messageAddText: string = 'Your product has been added to cart.';
   vievCartLink = this.page.locator('.modal-body .text-center:nth-child(2)');
+  popupButton = this.page.locator("//p [text()='Consent']");
 }

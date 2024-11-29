@@ -2,16 +2,20 @@ import { test, expect } from '@playwright/test';
 import { BottomNavigation } from '../components/bottomNavigation.components';
 import { EmailGenerator } from '../test-data/emailGenerator';
 import { LoginSignUpPage } from '../pages/loginSignUp.page';
+import { MainPage } from '../pages/main.page';
 
 test.describe('Subscription', () => {
   let bottomNavigation: BottomNavigation;
   let loginSignUp: LoginSignUpPage;
+  let mainPage: MainPage;
 
   test.beforeEach(async ({ page }) => {
     bottomNavigation = new BottomNavigation(page);
     loginSignUp = new LoginSignUpPage(page);
+    mainPage = new MainPage(page)
 
     await page.goto('/');
+    await mainPage.popupButton.click();
   });
 
   test('Send subscription (successful)', async () => {

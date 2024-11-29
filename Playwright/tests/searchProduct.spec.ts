@@ -1,12 +1,17 @@
 import { test, expect } from '@playwright/test';
 import { ProductPage } from '../pages/product.page';
+import { MainPage } from '../pages/main.page';
 
 test.describe('Search product in product page', () => {
   let productPage: ProductPage;
+  let mainPage: MainPage;
 
   test.beforeEach(async ({ page }) => {
     productPage = new ProductPage(page);
+    mainPage = new MainPage(page);
+
     await page.goto('/');
+    await mainPage.popupButton.click();
     await productPage.topNavigationBar.productLink.click();
   });
 

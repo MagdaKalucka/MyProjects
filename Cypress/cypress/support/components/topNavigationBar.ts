@@ -5,8 +5,8 @@ class TopNavigationBar {
   get logoutLink () {return cy.contains('Logout')};
   get loggedInUsLink () {return cy.contains('Logged in as')};
   get contactUsLink () {return cy.contains('Contact us')};
-  get productLink () {return cy.contains('Products')};
   get cartLink () {return cy.contains('Cart')};
+  get productLink () {return cy.contains('Products')};
 }
 
 export default TopNavigationBar;

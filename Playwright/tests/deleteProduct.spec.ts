@@ -18,7 +18,6 @@ test.describe('Delete product from the cart', () => {
   const password = loginData.userPassword;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
     const emailGenerator = new EmailGenerator();
     email = emailGenerator.generateEmail();
     loginSignUpPage = new LoginSignUpPage(page);
@@ -26,6 +25,9 @@ test.describe('Delete product from the cart', () => {
     mainPage = new MainPage(page);
     cartPage = new CartPage(page);
     productPage = new ProductPage(page);
+
+    await page.goto('/');
+    await mainPage.popupButton.click();
 
     await loginSignUpPage.singUp(userId, email);
     await signUpPage.singUpSuccefull(

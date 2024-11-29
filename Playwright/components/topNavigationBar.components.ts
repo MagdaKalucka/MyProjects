@@ -1,6 +1,7 @@
-import { Page } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 
 export class TopNavigationBar {
+
   constructor(private page: Page) {}
 
   signupLoginLink = this.page.getByRole('link', { name: ' Signup / Login' });

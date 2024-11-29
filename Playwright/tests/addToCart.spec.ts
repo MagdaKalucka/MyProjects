@@ -27,6 +27,7 @@ test.describe('Add product to cart', () => {
     productPage = new ProductPage(page);
 
     await page.goto('/');
+    await mainPage.popupButton.click();
 
     await loginSignUpPage.singUp(userId, email);
     await signUpPage.singUpSuccefull(
