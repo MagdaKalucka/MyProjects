@@ -120,5 +120,5 @@ test.describe('Proceed to checkout', () => {
       loginSignUpPage.missingMessageBrowser,
     );
   });
-/* I should write more tests about empty field but each tests will be this same it will only different name of field. */
+/*I should write more tests about empty field but each tests will be this same it will only different name of field.*/
 });
