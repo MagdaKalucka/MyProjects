@@ -46,7 +46,7 @@ Choose TypeScript. Name of your Tests folder.  Add a GitHub Actions workflow and
 Two options to run tests:
 - run in the Test Explorer in your IDE
 - go to the folder with projects, open terminal and type: 
->`dotnet test`  
+`dotnet test`  
 
 To generate raport with results after tests execution install  **LivingDoc.CLI** on your computer. Type in the terminal to install: 
 `dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI`
