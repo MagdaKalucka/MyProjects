@@ -1,0 +1,35 @@
+name: Playwright Tests
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    paths:
+      - 'Playwright/**'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+
+    - name: Install dependencies
+      run: npm ci
+      working-directory: ./Playwright
+
+    - name: Install Playwright browsers
+      run: npx playwright install --with-deps
+      working-directory: ./Playwright
+
+    - name: Run Playwright tests
+      run: npx playwright test
+      working-directory: ./Playwright
+
+    - uses: actions/upload-artifact@v4
+      if: ${{ always() }}
+      with:
+        name: playwright-report
+        path: Playwright/playwright-report/
+        retention-days: 30
