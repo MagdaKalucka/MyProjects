@@ -1,13 +1,14 @@
 ﻿using Common.Selenium;
 
 using SeleniumTests.PageObjectModels;
+using SeleniumTests.PageObjectModels.Selectors;
 
 namespace SeleniumTests.StepDefinitions
 {
     [Binding]
     internal class SubscriptionSteps
     {
-        private Subscription _subscription;
+        private readonly Subscription _subscription;
 
         internal SubscriptionSteps(WebDriverProvider webDriverProvider)
         {
@@ -41,13 +42,13 @@ namespace SeleniumTests.StepDefinitions
         [Then(@"User receives information about successful subscription")]
         internal void UserGetsInformationAboutSuccessfulSubscription()
         {
-            _subscription.CheckingSuccessSubscribe();
+            Assert.Equivalent(_subscription.GetTextSuccessSubscribe(), "You have been successfully subscribed!");
         }
 
         [Then(@"User gets message: (.*)")]
         internal void UserGetsMessage(string message)
         {
-            _subscription.CheckMessageIncorrectEmail(message);
+            Assert.Equivalent(_subscription.GetValidationMessage(CommonSelectors.SubscriptionInput), message);
         }
     }
 }

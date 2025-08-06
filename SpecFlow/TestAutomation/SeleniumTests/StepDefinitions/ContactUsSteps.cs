@@ -1,6 +1,7 @@
 ﻿using Common.Selenium;
 
 using SeleniumTests.PageObjectModels;
+using SeleniumTests.PageObjectModels.Selectors;
 
 namespace SeleniumTests.StepDefinitions
 {
@@ -65,13 +66,13 @@ namespace SeleniumTests.StepDefinitions
         [Then(@"User sends correct message")]
         internal void UserSendsCorrectMessage()
         {
-            _contactUs.CheckCorrectSendForm();
+            Assert.Equivalent(_contactUs.GetTextSuccessSendForm(), "Success! Your details have been submitted successfully.");
         }
 
         [Then(@"User can't send form - fill out this field")]
         internal void UserCantSendFormFillOutThisField()
         {
-            _contactUs.CheckMessageEmptyEmail();
+            Assert.Equivalent(_contactUs.GetValidationMessage(ContactUsSelectors.ContactEmailInput), BasePage.MessageEmptyField);
         }
 
         [When(@"User can come back to home page")]
@@ -89,7 +90,7 @@ namespace SeleniumTests.StepDefinitions
         [Then(@"User can't sent form - incorrect email messaage")]
         internal void UserCantSentFormUncorectEMailMessaage()
         {
-            _contactUs.CheckMessageIncorrectEmail();
+            Assert.Equivalent(_contactUs.GetValidationMessage(ContactUsSelectors.ContactEmailInput), BasePage.MessageIncorrectEmail);
         }
     }
 }

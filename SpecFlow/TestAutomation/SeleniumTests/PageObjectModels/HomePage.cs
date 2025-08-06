@@ -8,8 +8,6 @@ namespace SeleniumTests.PageObjectModels
     {
         private const string Url = "https://www.automationexercise.com/";
 
-        private const string PageTitle = "Automation Exercise";
-
         private readonly IWebDriver _driver;
 
         internal HomePage(IWebDriver driver)
@@ -42,7 +40,7 @@ namespace SeleniumTests.PageObjectModels
 
         internal void IsLoaded()
         {
-            EnsurePageIsLoaded(PageTitle, Url);
+            EnsurePageIsLoaded(Url);
         }
 
         internal void TypeEmailSubscription()

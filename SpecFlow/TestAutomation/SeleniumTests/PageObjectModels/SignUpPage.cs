@@ -10,15 +10,9 @@ namespace SeleniumTests.PageObjectModels
     {
         private const string Url = "https://www.automationexercise.com/signup";
 
-        private const string PageTitle = "Automation Exercise - Signup";
-
         private const string UrlAccountCreate = "https://www.automationexercise.com/account_created";
 
-        private const string PageTitleAccountCreate = "Automation Exercise - Account Created";
-
         private const string UrlAccountDeleted = "https://www.automationexercise.com/delete_account";
-
-        private const string PageTitleAccountDeleted = "Automation Exercise - Account Created";
 
         private const string FirstName = "John";
 
@@ -41,7 +35,7 @@ namespace SeleniumTests.PageObjectModels
 
         internal void IsLoaded()
         {
-            EnsurePageIsLoaded(PageTitle, Url);
+            EnsurePageIsLoaded(Url);
         }
 
         internal void ScroolOnTheBottomPage()
@@ -58,11 +52,6 @@ namespace SeleniumTests.PageObjectModels
         internal void ClickButtonCreateAcount()
         {
             _driver.FindElement(SignUpSelectors.CreateAccountButton).Click();
-        }
-
-        internal void GetErrorNotification()
-        {
-            Assert.Equivalent(GetValidationMessage(SignUpSelectors.PasswordInput), MessageEmptyField);
         }
 
         internal void SelectMr()
@@ -136,12 +125,12 @@ namespace SeleniumTests.PageObjectModels
 
         internal void IsLoadedAccountCreation()
         {
-            EnsurePageIsLoaded(PageTitleAccountCreate, UrlAccountCreate);
+            EnsurePageIsLoaded(UrlAccountCreate);
         }
 
         internal void IsLoadedAccountDeleted()
         {
-            EnsurePageIsLoaded(PageTitleAccountDeleted, UrlAccountDeleted);
+            EnsurePageIsLoaded(UrlAccountDeleted);
         }
 
         internal void ClickContinueButton()

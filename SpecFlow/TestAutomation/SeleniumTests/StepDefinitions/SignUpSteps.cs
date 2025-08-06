@@ -1,13 +1,14 @@
 ﻿using Common.Selenium;
 
 using SeleniumTests.PageObjectModels;
+using SeleniumTests.PageObjectModels.Selectors;
 
 namespace SeleniumTests.StepDefinitions
 {
     [Binding]
     internal class SignUpSteps
     {
-        private SignUpPage _signUp;
+        private readonly SignUpPage _signUp;
 
         internal SignUpSteps(WebDriverProvider webDriverProvider)
         {
@@ -30,7 +31,7 @@ namespace SeleniumTests.StepDefinitions
         [Then(@"User gets notification about empty field")]
         internal void UserGetsNotificationAboutEmptyField()
         {
-            _signUp.GetErrorNotification();
+            Assert.Equivalent(_signUp.GetValidationMessage(SignUpSelectors.PasswordInput), BasePage.MessageEmptyField);
         }
 
         [When(@"User selects his / her gender")]

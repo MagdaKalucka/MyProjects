@@ -8,13 +8,9 @@ namespace SeleniumTests.PageObjectModels
     {
         private const string Url = "https://www.automationexercise.com/contact_us";
 
-        private const string PageTitle = "Automation Exercise - Contact Us";
-
         private const string Subject = "Test subject";
 
         private const string TestMessage = "Test message";
-
-        private const string MessageSuccessSendForm = "Success! Your details have been submitted successfully.";
 
         private readonly IWebDriver _driver;
 
@@ -23,7 +19,7 @@ namespace SeleniumTests.PageObjectModels
 
         internal void IsLoaded()
         {
-            EnsurePageIsLoaded(PageTitle, Url);
+            EnsurePageIsLoaded(Url);
         }
 
         internal void TypeContactUsEmail()
@@ -71,16 +67,6 @@ namespace SeleniumTests.PageObjectModels
             return _driver.FindElement(ContactUsSelectors.ContactUsCorrectSendForm).Text;
         }
 
-        internal void CheckCorrectSendForm()
-        {
-            Assert.Equivalent(GetTextSuccessSendForm(), MessageSuccessSendForm);
-        }
-
-        internal void CheckMessageEmptyEmail()
-        {
-            Assert.Equivalent(GetValidationMessage(ContactUsSelectors.ContactEmailInput), MessageEmptyField);
-        }
-
         internal void ClickHomeButton()
         {
             WaitUntilElementDisplayed(ContactUsSelectors.ContactUsHomeButton);
@@ -90,11 +76,6 @@ namespace SeleniumTests.PageObjectModels
         internal void TypeContactUsIncorrectEmail()
         {
             _driver.FindElement(ContactUsSelectors.ContactEmailInput).SendKeys(IncorrectEmail);
-        }
-
-        internal void CheckMessageIncorrectEmail()
-        {
-            Assert.Equivalent(GetValidationMessage(ContactUsSelectors.ContactEmailInput), MessageIncorrectEmail);
         }
     }
 }

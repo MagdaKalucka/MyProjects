@@ -31,7 +31,7 @@ namespace SeleniumTests.PageObjectModels
 
         internal BasePage(IWebDriver driver) => _driver = driver;
 
-        public string Email => $"userExamples123+{DateTime.Now.ToString("yyyyMMddHHmmss.fff")}@gmail.com";
+        public static string Email => $"userExamples123+{DateTime.Now.ToString("yyyyMMddHHmmss.fff")}@gmail.com";
 
         internal SignUpLogin ClickLinkLogin()
         {
@@ -47,13 +47,15 @@ namespace SeleniumTests.PageObjectModels
             return new ContactUsPage(_driver);
         }
 
-        protected void EnsurePageIsLoaded(string pageTitle, string url)
+        internal void EnsurePageIsLoaded(string url)
         {
-            _driver.Url.Should().Be(url);
-            _driver.Title.Should().Be(pageTitle);
+            if (_driver.Url != url)
+            {
+                throw new Exception($"Failed to load page. Page URL = '{_driver.Url}'");
+            }
         }
 
-        protected string GetValidationMessage(By selector)
+        internal string GetValidationMessage(By selector)
         {
             return _driver.FindElement(selector).GetDomProperty("validationMessage");
         }

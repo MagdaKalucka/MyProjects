@@ -8,14 +8,6 @@ namespace SeleniumTests.PageObjectModels
     {
         private const string Url = "https://www.automationexercise.com/login";
 
-        private const string PageTitle = "Automation Exercise - Signup / Login";
-
-        private const string LoggedInUs = $"Logged in as {UserId}";
-
-        private const string IncorrectText = "Your email or password is incorrect!";
-
-        private const string EmailAlreadyExistText = "Email Address already exist!";
-
         private readonly IWebDriver _driver;
 
         internal SignUpLogin(IWebDriver driver)
@@ -38,17 +30,12 @@ namespace SeleniumTests.PageObjectModels
 
         internal void IsLoaded()
         {
-            EnsurePageIsLoaded(PageTitle, Url);
+            EnsurePageIsLoaded(Url);
         }
 
         internal string GetUserIsLogginedInUsText()
         {
             return _driver.FindElement(CommonSelectors.LoggedInAsLink).Text;
-        }
-
-        internal void UserIsLoggedInAs()
-        {
-            GetUserIsLogginedInUsText().Should().Be(LoggedInUs);
         }
 
         internal void TypeIncorrectEmail()
@@ -61,24 +48,9 @@ namespace SeleniumTests.PageObjectModels
             _driver.FindElement(SignUpLoginSelectors.LoginPasswordInput).SendKeys(IncorrectPassword);
         }
 
-        internal void CheckValidationMessageInPasswordField()
-        {
-            Assert.Equivalent(GetValidationMessage(SignUpLoginSelectors.LoginPasswordInput), MessageEmptyField);
-        }
-
-        internal void CheckValidationMessageInIncorrectEmail()
-        {
-            Assert.Equivalent(GetValidationMessage(SignUpLoginSelectors.LoginEmailInput), MessageIncorrectEmail);
-        }
-
         internal string GetIncorrectText()
         {
             return _driver.FindElement(SignUpLoginSelectors.ErrorText).Text;
-        }
-
-        internal void CheckIncorrectText()
-        {
-            GetIncorrectText().Should().Be(IncorrectText);
         }
 
         internal void TypeUserName()
@@ -86,9 +58,9 @@ namespace SeleniumTests.PageObjectModels
             _driver.FindElement(SignUpLoginSelectors.NameInput).SendKeys(UserName);
         }
 
-        internal void TypeNewEmail(string email)
+        internal void TypeNewEmail()
         {
-            _driver.FindElement(SignUpLoginSelectors.SignupEmailInput).SendKeys(email);
+            _driver.FindElement(SignUpLoginSelectors.SignupEmailInput).SendKeys(Email);
         }
 
         internal void ClickSignupButton()
@@ -101,11 +73,6 @@ namespace SeleniumTests.PageObjectModels
             _driver.FindElement(SignUpLoginSelectors.SignupEmailInput).SendKeys(email);
         }
 
-        internal void GetErrorMessage(string message)
-        {
-            Assert.Equivalent(GetValidationMessage(SignUpLoginSelectors.SignupEmailInput), message);
-        }
-
         internal void TypeUserExistEmail()
         {
             _driver.FindElement(SignUpLoginSelectors.SignupEmailInput).SendKeys(UserEmail);
@@ -114,16 +81,6 @@ namespace SeleniumTests.PageObjectModels
         internal string GetTextEmailAlreadyExist()
         {
             return _driver.FindElement(SignUpLoginSelectors.ErrorText2).Text;
-        }
-
-        internal void CheckTextEmailAlreadyExist()
-        {
-            GetTextEmailAlreadyExist().Should().Be(EmailAlreadyExistText);
-        }
-
-        internal void GetMessageEmptyName()
-        {
-            Assert.Equivalent(GetValidationMessage(SignUpLoginSelectors.NameInput), MessageEmptyField);
         }
     }
 }

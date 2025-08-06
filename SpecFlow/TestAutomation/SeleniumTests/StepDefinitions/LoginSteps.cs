@@ -50,7 +50,7 @@ namespace SeleniumTests.StepDefinitions
         [Then(@"User check user name's")]
         internal void UserCheckUserName()
         {
-            _signUpLogin.UserIsLoggedInAs();
+            _signUpLogin.GetUserIsLogginedInUsText().Should().Be($"Logged in as {BasePage.UserId}");
         }
 
         [When(@"User fills email and password in login fields")]
@@ -101,19 +101,19 @@ namespace SeleniumTests.StepDefinitions
         [Then(@"User gets message about incorrect email")]
         internal void UserGetsMessageAboutIncorrectEmail()
         {
-            _signUpLogin.CheckValidationMessageInIncorrectEmail();
+            Assert.Equivalent(_signUpLogin.GetValidationMessage(SignUpLoginSelectors.LoginEmailInput), BasePage.MessageIncorrectEmail);
         }
 
         [Then(@"Users gets message about incorrect email or password")]
         internal void UsersGetsMessageAboutIncorrectEmailOrPassword()
         {
-            _signUpLogin.CheckIncorrectText();
+            _signUpLogin.GetIncorrectText().Should().Be("Your email or password is incorrect!");
         }
 
         [Then(@"User gets message about empty field")]
         internal void UserGetsMessageAboutEmptyField()
         {
-            _signUpLogin.CheckValidationMessageInPasswordField();
+            Assert.Equivalent(_signUpLogin.GetValidationMessage(SignUpLoginSelectors.LoginPasswordInput), BasePage.MessageEmptyField);
         }
 
         [When(@"User fills name")]
@@ -125,9 +125,9 @@ namespace SeleniumTests.StepDefinitions
         [When(@"User fills new email")]
         internal void UserFillsNewEmail()
         {
-            string email = $"userExamples123+{DateTime.Now.ToString("yyyyMMddHHmmss.fff")}@gmail.com";
-            _signUpLogin.TypeNewEmail(email);
-            _specFlowOutputHelper.WriteLine($"User email {email}");
+            //string email = $"userExamples123+{DateTime.Now.ToString("yyyyMMddHHmmss.fff")}@gmail.com";
+            _signUpLogin.TypeNewEmail();
+            //_specFlowOutputHelper.WriteLine($"User email {}");
         }
 
         [When(@"User clicks Signup button")]
@@ -145,7 +145,7 @@ namespace SeleniumTests.StepDefinitions
         [Then(@"User gets error (.*)")]
         internal void UserGetsError(string message)
         {
-            _signUpLogin.GetErrorMessage(message);
+            Assert.Equivalent(_signUpLogin.GetValidationMessage(SignUpLoginSelectors.SignupEmailInput), message);
         }
 
         [When(@"User fills exist user email")]
@@ -157,13 +157,13 @@ namespace SeleniumTests.StepDefinitions
         [Then(@"User gets message about exist user")]
         internal void UserGetsMessageAboutExistUser()
         {
-            _signUpLogin.CheckTextEmailAlreadyExist();
+            _signUpLogin.GetTextEmailAlreadyExist().Should().Be("Email Address already exist!");
         }
 
         [Then(@"User gets message fill out this field")]
         internal void UserGetsMessageFillOutThisField()
         {
-            _signUpLogin.Should();
+            Assert.Equivalent(_signUpLogin.GetValidationMessage(SignUpLoginSelectors.NameInput), BasePage.MessageEmptyField);
         }
     }
 }
