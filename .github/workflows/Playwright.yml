@@ -7,7 +7,7 @@ on:
       - 'Playwright/**'
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     - uses: actions/checkout@v4
@@ -19,12 +19,17 @@ jobs:
       run: npm ci
       working-directory: ./Playwright
 
+    - name: Install required dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libasound2 libnss3 libxss1 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxcomposite1 libxdamage1 libxrandr2 libgbm1 libgtk-3-0
+
     - name: Install Playwright browsers
       run: npx playwright install --with-deps
       working-directory: ./Playwright
 
     - name: Run Playwright tests
-      run: npx playwright test
+      run: npx playwright test --timeout=60000
       working-directory: ./Playwright
 
     - uses: actions/upload-artifact@v4

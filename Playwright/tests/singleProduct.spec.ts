@@ -24,7 +24,11 @@ test.describe('Product page', () => {
     email = emailGenerator.generateEmail();
 
     await page.goto('/');
-    await mainPage.popupButton.click();
+    
+    if (await mainPage.popupButton.isVisible())
+       {
+          await mainPage.popupButton.click();
+       }
   });
 
   test('Entry to the product page', async ({ page }) => {

@@ -20,7 +20,12 @@ test.describe('Contact us page', () => {
     email = emailGenerator.generateEmail();
 
     await page.goto('/');
-    await mainPage.popupButton.click();
+
+    if (await mainPage.popupButton.isVisible())
+       {
+          await mainPage.popupButton.click();
+       }
+       
     await contactUs.topNavigationBar.contactUsLink.click();
   });
 

@@ -10,6 +10,10 @@ namespace Core.WebDriver
         {
             options.AddArgument("--lang=en");
             options.AddArgument("--start-maximized");
+            options.AddArgument("--headless=new");
+            options.AddArgument("--no-sandbox");
+            options.AddArgument("--disable-dev-shm-usage");
+            options.AddArgument("--incognito");
             options.SetLoggingPreference(LogType.Browser, LogLevel.All);
         }
 

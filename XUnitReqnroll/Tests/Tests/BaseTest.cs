@@ -2,6 +2,8 @@
 
 using Core.WebDriver;
 
+using Xunit;
+
 using OpenQA.Selenium;
 
 namespace Tests.Tests

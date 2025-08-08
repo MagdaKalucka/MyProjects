@@ -33,7 +33,11 @@ test.describe('Proceed to checkout', () => {
     paymentPage = new PaymentPage(page);
 
     await page.goto('/');
-    await mainPage.popupButton.click();
+    
+    if (await mainPage.popupButton.isVisible())
+       {
+          await mainPage.popupButton.click();
+       }
 
     await loginSignUpPage.singUp(userId, email);
     await signUpPage.singUpSuccefull(

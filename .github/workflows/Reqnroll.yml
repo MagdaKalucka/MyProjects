@@ -1,0 +1,73 @@
+name: Reqnroll Tests with Allure
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Show structore
+      run: ls -R
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore XUnitReqnroll/Saucedemo.sln
+
+    - name: Build project
+      run: dotnet build XUnitReqnroll/Saucedemo.sln --configuration Release --no-restore
+
+    - name: Run tests
+      run: dotnet test XUnitReqnroll/Tests/Tests.csproj --configuration Release
+
+    - name: Copy allure-results to expected location
+      run: |
+        mkdir -p build/allure-results
+        cp -r XUnitReqnroll/Tests/bin/Release/net8.0/allure-results/* build/allure-results/
+
+    - name: Setup Java for Allure
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: 17
+
+    - name: Checkout gh-pages branch for report history
+      uses: actions/checkout@v3
+      if: always()
+      continue-on-error: true
+      with:
+        ref: gh-pages
+        path: gh-pages
+
+    - name: Generate Allure Report
+      uses: simple-elf/allure-report-action@v1.7
+      if: always()
+      with:
+        gh_pages: gh-pages
+        allure_history: allure-history
+        allure_results: build/allure-results
+
+    - name: Publish Allure Report to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: always()
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: allure-history
+
+    - name: Upload Allure HTML report as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: allure-report
+        path: allure-report

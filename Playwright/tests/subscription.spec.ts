@@ -15,7 +15,11 @@ test.describe('Subscription', () => {
     mainPage = new MainPage(page)
 
     await page.goto('/');
-    await mainPage.popupButton.click();
+    
+    if (await mainPage.popupButton.isVisible())
+       {
+          await mainPage.popupButton.click();
+       }
   });
 
   test('Send subscription (successful)', async () => {

@@ -1,5 +1,7 @@
 ﻿using Core.WebDriver;
 
+using Reqnroll;
+
 using FluentAssertions;
 
 using UI.PageObject;

@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 
+using Xunit;
+
 using UI.PageObject;
 
 namespace Tests.Tests

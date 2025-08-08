@@ -11,7 +11,12 @@ test.describe('Search product in product page', () => {
     mainPage = new MainPage(page);
 
     await page.goto('/');
-    await mainPage.popupButton.click();
+    
+    if (await mainPage.popupButton.isVisible())
+       {
+          await mainPage.popupButton.click();
+       }
+
     await productPage.topNavigationBar.productLink.click();
   });
 
