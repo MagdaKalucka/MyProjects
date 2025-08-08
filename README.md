@@ -8,7 +8,9 @@ This repository present automated tests for website:
 > https://www.saucedemo.com
 
 The project includes both **xUnit** and **Reqnroll** (BDD) tests written in **C#** with **Selenium**.
-Test reports are generated using Allure, but only for Reqnroll scenarios.
+Test reports are generated using Allure, but only for Reqnroll scenarios. 
+
+View report: https://magdakalucka.github.io/MyProjects/
 
 > https://reqres.in/
 
